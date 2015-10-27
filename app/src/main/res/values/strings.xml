@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ProyectoMoviles</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_administrador">Administrador</string>
+    <string name="title_activity_registro">Registro</string>
+    <string name="title_activity_proyecto_in">proyectoIn</string>
+    <string name="title_activity_monitoreo">Monitoreo</string>
+    <string name="title_activity_issues">Issues</string>
+    <string name="title_activity_staff">Staff</string>
+    <string name="title_activity_proyecto_in_staff">proyectoInStaff</string>
+    <string name="title_activity_asistencia_staff">asistenciaStaff</string>
+    <string name="title_activity_encuesta">encuesta</string>
+</resources>
