@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Proyecto"
-        android:id="@+id/textView10"
+        android:id="@+id/nombreTV"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
@@ -19,46 +19,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Nombre"
-        android:id="@+id/textView10"
-        android:layout_alignBottom="@+id/imageView2" />
+        android:text="Lugar"
+        android:id="@+id/lugarTV"
+        android:layout_below="@+id/nombreTV"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Lugar"
-        android:id="@+id/textView10"
-        android:layout_marginTop="69dp"
-        android:layout_below="@+id/textView10"
-        android:layout_alignParentStart="true" />
+        android:text="NombreStaff"
+        android:id="@+id/nombreStaffTV"
+        android:layout_below="@+id/lugarTV"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="45dp" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
-        android:src="@mipmap/ic_launcher"
-        android:layout_below="@+id/textView10"
-        android:layout_toEndOf="@+id/textView10"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="59dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="126dp" />
 
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Encuesta"
-        android:id="@+id/encuestaBT"
-        android:layout_marginTop="49dp"
-        android:layout_below="@+id/asistenciaBT"
-        android:layout_alignEnd="@+id/imageView2" />
+        android:id="@+id/imageView3"
+        android:layout_alignTop="@+id/nombreStaffTV"
+        android:layout_toEndOf="@+id/nombreStaffTV"
+        android:layout_marginStart="43dp"
+        android:src="@mipmap/ic_launcher" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Asistencia"
         android:id="@+id/asistenciaBT"
-        android:layout_below="@+id/imageView2"
-        android:layout_alignEnd="@+id/encuestaBT"
-        android:layout_marginTop="119dp" />
+        android:layout_above="@+id/imageView2"
+        android:layout_toEndOf="@+id/nombreStaffTV"
+        android:layout_marginBottom="95dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Encuesta"
+        android:id="@+id/encuestaBT"
+        android:layout_above="@+id/imageView2"
+        android:layout_alignEnd="@+id/asistenciaBT" />
 
 </RelativeLayout>

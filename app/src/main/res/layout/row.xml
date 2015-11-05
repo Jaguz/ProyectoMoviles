@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Lugar"
-        android:id="@+id/lugarTV"
+        android:id="@+id/nombreTV"
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"
         android:layout_marginTop="19dp" />
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/lugarTV"
-        android:layout_alignTop="@+id/lugarTV"
+        android:id="@+id/nombreTV"
+        android:layout_alignTop="@+id/nombreTV"
         android:layout_toEndOf="@+id/textView3" />
 </RelativeLayout>

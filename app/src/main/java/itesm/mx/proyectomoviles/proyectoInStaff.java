@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class proyectoInStaff extends AppCompatActivity {
     private static final String LOG_TAG = "";
@@ -15,14 +16,23 @@ public class proyectoInStaff extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proyecto_in_staff);
+        final Bundle datos = getIntent().getExtras();
+
         final Button monitoreoButton = (Button) findViewById(R.id.encuestaBT);
         final Button asistenciaButton = (Button) findViewById(R.id.asistenciaBT);
+        final TextView nombre = (TextView) findViewById(R.id.nombreTV);
+        final TextView lugar = (TextView) findViewById(R.id.lugarTV);
 
-        View.OnClickListener registro = new View.OnClickListener(){
+        nombre.setText(datos.getString("nombre"));
+        lugar.setText(datos.getString("lugar"));
+
+        View.OnClickListener encuesta = new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(proyectoInStaff.this, Monitoreo.class);
+                Intent intent = new Intent(proyectoInStaff.this, encuesta.class);
+                intent.putExtra("lugar", datos.getString("lugar"));
+                intent.putExtra("nombre", datos.getString("nombre"));
                 startActivityForResult(intent,1);
             }
         };
@@ -32,11 +42,13 @@ public class proyectoInStaff extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(proyectoInStaff.this, asistenciaStaff.class);
+                intent.putExtra("lugar", datos.getString("lugar"));
+                intent.putExtra("nombre", datos.getString("nombre"));
                 startActivityForResult(intent,1);
             }
         };
         asistenciaButton.setOnClickListener(asistencia);
-        monitoreoButton.setOnClickListener(registro);
+        monitoreoButton.setOnClickListener(encuesta);
 
 
 
