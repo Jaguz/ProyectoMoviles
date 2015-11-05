@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class proyectoIn extends AppCompatActivity {
 
@@ -16,17 +17,41 @@ public class proyectoIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proyecto_in);
-        final Button monitoreoButton = (Button) findViewById(R.id.encuestaBT);
 
-        View.OnClickListener registro = new View.OnClickListener(){
+        final Bundle datos = getIntent().getExtras();
+
+
+        final TextView nombre = (TextView) findViewById(R.id.nombreTV);
+        final TextView lugar = (TextView) findViewById(R.id.nombreTV);
+        final Button monitoreoButton = (Button) findViewById(R.id.encuestaBT);
+        final Button reporteButton = (Button) findViewById(R.id.reporteBT);
+
+        nombre.setText(datos.getString("nombre"));
+        lugar.setText(datos.getString("lugar"));
+
+        View.OnClickListener monitoreo = new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(proyectoIn.this, Monitoreo.class);
+                intent.putExtra("lugar", datos.getString("lugar"));
+                intent.putExtra("nombre", datos.getString("nombre"));
                 startActivityForResult(intent,1);
             }
         };
-        monitoreoButton.setOnClickListener(registro);
+
+        View.OnClickListener reporte = new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(proyectoIn.this, Issues.class);
+                intent.putExtra("lugar", datos.getString("lugar"));
+                intent.putExtra("nombre", datos.getString("nombre"));
+                startActivityForResult(intent,1);
+            }
+        };
+        reporteButton.setOnClickListener(reporte);
+        monitoreoButton.setOnClickListener(monitoreo);
 
 
     }

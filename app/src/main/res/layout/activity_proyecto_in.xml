@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Lugar"
-        android:id="@+id/lugarTV"
+        android:id="@+id/nombreTV"
         android:layout_below="@+id/nombreTV"
         android:layout_alignParentStart="true"
         android:layout_marginTop="41dp" />
@@ -47,7 +47,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:layout_alignTop="@+id/lugarTV"
+        android:layout_alignTop="@+id/nombreTV"
         android:layout_alignEnd="@+id/encuestaBT"
         android:src="@mipmap/ic_launcher" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reporte"
+        android:id="@+id/reporteBT"
+        android:layout_below="@+id/encuestaBT"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp" />
 </RelativeLayout>

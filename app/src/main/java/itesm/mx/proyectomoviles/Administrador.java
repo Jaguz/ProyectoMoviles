@@ -1,7 +1,6 @@
 package itesm.mx.proyectomoviles;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,7 +44,6 @@ public class Administrador extends AppCompatActivity {
                 Intent intent = new Intent (Administrador.this, proyectoIn.class);
                 Proyecto proyecto= (Proyecto) miAdaptador.getItem(position);
                 Bundle bundleAct = new Bundle();
-                intent.putExtra("posicion", (Parcelable) miAdaptador.getItem(position));
                 intent.putExtra("lugar", proyecto.getLugar());
                 intent.putExtra("nombre", proyecto.getNombre());
                 startActivity(intent);
