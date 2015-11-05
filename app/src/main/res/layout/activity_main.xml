@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Dirección Sentido Humano"
+        android:text="Dirección de Sentido Humano"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -18,26 +18,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/usuarioET"
-        android:layout_marginTop="80dp"
-        android:text="Usuario"
+        android:layout_marginTop="48dp"
+        android:hint="Usuario"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/contrasenaET"
-        android:layout_marginTop="38dp"
-        android:text="Contraseña"
+        android:hint="Contraseña"
+        android:password="true"
         android:layout_below="@+id/usuarioET"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignEnd="@+id/usuarioET" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Entrar"
         android:id="@+id/entrarBT"
-        android:layout_marginTop="72dp"
         android:layout_below="@+id/contrasenaET"
         android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView4"
+        android:layout_below="@+id/entrarBT"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:src="@drawable/sentido_humano" />
 </RelativeLayout>

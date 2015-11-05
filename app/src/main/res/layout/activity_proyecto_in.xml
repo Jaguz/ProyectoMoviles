@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Proyecto"
+        android:text="Bienvenido: "
         android:id="@+id/textView4"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
@@ -21,42 +21,26 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nombre"
         android:id="@+id/nombreTV"
-        android:layout_below="@+id/textView4"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="28dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/asistenciaBT"
+        android:layout_alignParentEnd="true" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Lugar"
-        android:id="@+id/nombreTV"
+        android:text="Asistencia"
+        android:id="@+id/asistenciaBT"
+        android:layout_marginTop="106dp"
         android:layout_below="@+id/nombreTV"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="41dp" />
+        android:layout_alignStart="@+id/monitoreoBT" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Monitoreo"
-        android:id="@+id/encuestaBT"
-        android:layout_centerVertical="true"
+        android:id="@+id/monitoreoBT"
+        android:layout_marginTop="89dp"
+        android:layout_below="@+id/asistenciaBT"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_alignTop="@+id/nombreTV"
-        android:layout_alignEnd="@+id/encuestaBT"
-        android:src="@mipmap/ic_launcher" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reporte"
-        android:id="@+id/reporteBT"
-        android:layout_below="@+id/encuestaBT"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="69dp" />
 </RelativeLayout>

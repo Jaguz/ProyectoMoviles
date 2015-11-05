@@ -18,7 +18,7 @@ public class proyectoInStaff extends AppCompatActivity {
         setContentView(R.layout.activity_proyecto_in_staff);
         final Bundle datos = getIntent().getExtras();
 
-        final Button monitoreoButton = (Button) findViewById(R.id.encuestaBT);
+        final Button monitoreoButton = (Button) findViewById(R.id.monitoreoBT);
         final Button asistenciaButton = (Button) findViewById(R.id.asistenciaBT);
         final TextView nombre = (TextView) findViewById(R.id.nombreTV);
         final TextView lugar = (TextView) findViewById(R.id.lugarTV);
