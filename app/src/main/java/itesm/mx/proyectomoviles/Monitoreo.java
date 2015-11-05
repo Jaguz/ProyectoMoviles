@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class Monitoreo extends AppCompatActivity {
 
@@ -11,6 +12,13 @@ public class Monitoreo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitoreo);
+        final Bundle datos = getIntent().getExtras();
+
+        final TextView nombreproy = (TextView) findViewById(R.id.nombreTV);
+
+        nombreproy.setText(datos.getString("nombre"));
+
+
     }
 
     @Override

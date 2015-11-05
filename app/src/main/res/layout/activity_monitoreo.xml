@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nombre del proyecto"
-        android:id="@+id/textView5"
+        android:id="@+id/nombreTV"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/textView5"
+        android:layout_below="@+id/nombreTV"
         android:layout_alignParentStart="true"
         android:layout_marginTop="44dp" />
 
@@ -29,6 +29,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Asistencia por semana"
         android:id="@+id/textView6"
-        android:layout_below="@+id/textView5"
+        android:layout_below="@+id/nombreTV"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

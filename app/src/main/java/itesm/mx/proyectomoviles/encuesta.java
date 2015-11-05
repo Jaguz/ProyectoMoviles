@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class encuesta extends AppCompatActivity {
     private static final String LOG_TAG = "";
@@ -15,7 +16,12 @@ public class encuesta extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encuesta);
+
+        final Bundle datos = getIntent().getExtras();
+
         final Button terminarButton = (Button) findViewById(R.id.terminarBT);
+        final TextView nombre = (TextView) findViewById(R.id.nombreTV);
+        nombre.setText(datos.getString("nombre"));
 
         View.OnClickListener terminar = new View.OnClickListener(){
 

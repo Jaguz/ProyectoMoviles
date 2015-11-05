@@ -24,7 +24,7 @@ public class Staff extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff);
         final ListView proyectoLV;
-        proyectoLV =(ListView) findViewById(R.id.listViewProyecto);
+        proyectoLV =(ListView) findViewById(R.id.ListaStaff);
 
         Bundle datos = getIntent().getExtras();
 
@@ -35,10 +35,9 @@ public class Staff extends AppCompatActivity {
         final AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent (Staff.this, proyectoIn.class);
+                Intent intent = new Intent (Staff.this, proyectoInStaff.class);
                 Proyecto proyecto= (Proyecto) miAdaptador.getItem(position);
                 Bundle bundleAct = new Bundle();
-                intent.putExtra("posicion", (Parcelable) miAdaptador.getItem(position));
                 intent.putExtra("lugar", proyecto.getLugar());
                 intent.putExtra("nombre", proyecto.getNombre());
                 startActivity(intent);
