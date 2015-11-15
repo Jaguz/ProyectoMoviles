@@ -23,8 +23,8 @@ public class proyectoIn extends AppCompatActivity {
 
         final TextView nombre = (TextView) findViewById(R.id.nombreTV);
         final TextView lugar = (TextView) findViewById(R.id.nombreTV);
-        final Button monitoreoButton = (Button) findViewById(R.id.encuestaBT);
-        final Button reporteButton = (Button) findViewById(R.id.reporteBT);
+        final Button monitoreoButton = (Button) findViewById(R.id.asistenciaBT);
+        final Button reporteButton = (Button) findViewById(R.id.monitoreoBT);
 
         nombre.setText(datos.getString("nombre"));
         lugar.setText(datos.getString("lugar"));

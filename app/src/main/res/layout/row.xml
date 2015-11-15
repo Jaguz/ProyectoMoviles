@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#2E39B1">
 
     <TextView
         android:layout_width="wrap_content"
@@ -9,32 +10,35 @@
         android:text="Nombre:"
         android:id="@+id/textView3"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/nombreTV"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView3"
-        android:layout_marginStart="22dp" />
+        android:id="@+id/lugarTV"
+        android:layout_alignBaseline="@+id/lugar"
+        android:layout_alignBottom="@+id/lugar"
+        android:layout_toEndOf="@+id/textView3" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Lugar"
-        android:id="@+id/nombreTV"
+        android:text="Lugar:"
+        android:id="@+id/lugar"
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="19dp" />
+        android:layout_marginTop="19dp"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/nombreTV"
-        android:layout_alignTop="@+id/nombreTV"
-        android:layout_toEndOf="@+id/textView3" />
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_toEndOf="@+id/lugarTV" />
+
 </RelativeLayout>
