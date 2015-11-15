@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#2E39B1">
+    android:background="#2E39B1"
+    android:id="@+id/rowid">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Nombre:"
+        android:text="Nombre:  "
         android:id="@+id/textView3"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/nombreTV"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_toEndOf="@+id/lugarTV" />
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textView3" />
 
 </RelativeLayout>
