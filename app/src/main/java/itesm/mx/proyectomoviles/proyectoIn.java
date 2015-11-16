@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class proyectoIn extends AppCompatActivity {
 
     private static final String LOG_TAG = "";
@@ -19,8 +21,6 @@ public class proyectoIn extends AppCompatActivity {
         setContentView(R.layout.activity_proyecto_in);
 
         final Bundle datos = getIntent().getExtras();
-
-
         final TextView nombre = (TextView) findViewById(R.id.nombreTV);
         final TextView lugar = (TextView) findViewById(R.id.nombreTV);
         final Button monitoreoButton = (Button) findViewById(R.id.asistenciaBT);

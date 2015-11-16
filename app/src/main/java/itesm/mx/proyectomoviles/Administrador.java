@@ -1,6 +1,9 @@
 package itesm.mx.proyectomoviles;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,15 +19,18 @@ import java.util.List;
 
 public class Administrador extends AppCompatActivity {
     private static final String LOG_TAG = "";
+    ArrayList<Proyecto> teams = new ArrayList<Proyecto>();
+    ListView proyectoLV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final ListView proyectoLV;
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrador);
         final TextView mensaje = (TextView) findViewById(R.id.nombreTV);
         proyectoLV =(ListView) findViewById(R.id.listViewProyecto);
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
 
         Bundle datos = getIntent().getExtras();
 
