@@ -1,16 +1,13 @@
 package itesm.mx.proyectomoviles;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,7 @@ public class Staff extends AppCompatActivity {
         proyectoLV =(ListView) findViewById(R.id.ListaStaff);
 
         Bundle datos = getIntent().getExtras();
-
+/*
 
         final ListViewAdapter miAdaptador = new ListViewAdapter(getApplicationContext(),R.layout.row,getDataForListView());
         proyectoLV.setAdapter(miAdaptador);
@@ -38,12 +35,12 @@ public class Staff extends AppCompatActivity {
                 Intent intent = new Intent (Staff.this, proyectoInStaff.class);
                 Proyecto proyecto= (Proyecto) miAdaptador.getItem(position);
                 Bundle bundleAct = new Bundle();
-                intent.putExtra("lugar", proyecto.getLugar());
-                intent.putExtra("nombre", proyecto.getNombre());
+                intent.putExtra("lugar", proyecto.getEspacio());
+                intent.putExtra("nombre", proyecto.getIncubadora());
                 startActivity(intent);
             }
         };
-        proyectoLV.setOnItemClickListener(itemListener);
+        proyectoLV.setOnItemClickListener(itemListener);*/
     }
 
     @Override
@@ -68,15 +65,4 @@ public class Staff extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public List<Proyecto> getDataForListView(){
-        Proyecto proyecto;
-        List<Proyecto> listproyectos = new ArrayList<Proyecto>();
-        proyecto = new Proyecto("Diverciencia", "Caracol");
-        listproyectos.add(proyecto);
-
-        return listproyectos;
-
-
-
-    }
 }

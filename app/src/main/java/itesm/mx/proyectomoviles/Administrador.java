@@ -20,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Administrador extends AppCompatActivity {
     private static final String LOG_TAG = "";
@@ -33,7 +32,7 @@ public class Administrador extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrador);
-        final TextView mensaje = (TextView) findViewById(R.id.nombreTV);
+        final TextView mensaje = (TextView) findViewById(R.id.incubadoraTV);
         proyectoLV =(ListView) findViewById(R.id.listViewProyecto);
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         cargarBT = (Button) findViewById(R.id.proyectosBT);
@@ -65,8 +64,8 @@ public class Administrador extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent (Administrador.this, proyectoIn.class);
                 Proyecto proyecto = adapter.getItem(position);
-                intent.putExtra("lugar", proyecto.getLugar());
-                intent.putExtra("nombre", proyecto.getNombre());
+                intent.putExtra("lugar", proyecto.getEspacio());
+                intent.putExtra("nombre", proyecto.getIncubadora());
                 startActivity(intent);
             }
         };
@@ -84,7 +83,8 @@ public class Administrador extends AppCompatActivity {
 
                 String nombre = columns.getJSONObject(1).getString("v");
                 String lugar = columns.getJSONObject(2).getString("v");
-                Proyecto proyecto = new Proyecto(nombre, lugar);
+                String proyect = columns.getJSONObject(3).getString("v");
+                Proyecto proyecto = new Proyecto(nombre, lugar, proyect);
                 proyectos.add(proyecto);
             }
 
