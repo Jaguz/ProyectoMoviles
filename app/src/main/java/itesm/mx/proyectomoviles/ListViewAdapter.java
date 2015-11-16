@@ -36,7 +36,7 @@ public class ListViewAdapter extends ArrayAdapter<Proyecto> {
             row = inflater.inflate(layoutResourceId, parent, false);
         }
         TextView nombre = (TextView) row.findViewById(R.id.nombreTV);
-        TextView lugar = (TextView) row.findViewById(R.id.nombreTV);
+        TextView lugar = (TextView) row.findViewById(R.id.lugarTV);
 
         Proyecto proyecto = proyectoList.get(position);
         nombre.setText(proyecto.getNombre());
