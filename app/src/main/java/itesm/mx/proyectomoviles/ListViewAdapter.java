@@ -35,16 +35,17 @@ public class ListViewAdapter extends ArrayAdapter<Proyecto> {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layoutResourceId, parent, false);
         }
-        TextView nombre = (TextView) row.findViewById(R.id.nombreTV);
-        TextView lugar = (TextView) row.findViewById(R.id.nombreTV);
+        TextView incubadora = (TextView) row.findViewById(R.id.incubadoraTV);
+        TextView espacio = (TextView) row.findViewById(R.id.espacioTV);
+        TextView proyect = (TextView) row.findViewById(R.id.proyectoTV);
 
         Proyecto proyecto = proyectoList.get(position);
-        nombre.setText(proyecto.getNombre());
-        lugar.setText(proyecto.getLugar());
-
-
-        nombre.setTextColor(Color.BLACK);
-        lugar.setTextColor(Color.BLACK);
+        incubadora.setText(proyecto.getIncubadora());
+        espacio.setText(proyecto.getEspacio());
+        proyect.setText(proyecto.getProyecto());
+        incubadora.setTextColor(Color.BLACK);
+        espacio.setTextColor(Color.BLACK);
+        proyect.setTextColor(Color.BLACK);
 
         return row;
     }

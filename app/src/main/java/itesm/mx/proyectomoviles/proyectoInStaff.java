@@ -20,8 +20,8 @@ public class proyectoInStaff extends AppCompatActivity {
 
         final Button monitoreoButton = (Button) findViewById(R.id.monitoreoBT);
         final Button asistenciaButton = (Button) findViewById(R.id.asistenciaBT);
-        final TextView nombre = (TextView) findViewById(R.id.nombreTV);
-        final TextView lugar = (TextView) findViewById(R.id.lugarTV);
+        final TextView nombre = (TextView) findViewById(R.id.incubadoraTV);
+        final TextView lugar = (TextView) findViewById(R.id.espacioTV);
 
         nombre.setText(datos.getString("nombre"));
         lugar.setText(datos.getString("lugar"));

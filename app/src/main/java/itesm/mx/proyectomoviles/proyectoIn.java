@@ -19,10 +19,8 @@ public class proyectoIn extends AppCompatActivity {
         setContentView(R.layout.activity_proyecto_in);
 
         final Bundle datos = getIntent().getExtras();
-
-
-        final TextView nombre = (TextView) findViewById(R.id.nombreTV);
-        final TextView lugar = (TextView) findViewById(R.id.nombreTV);
+        final TextView nombre = (TextView) findViewById(R.id.incubadoraTV);
+        final TextView lugar = (TextView) findViewById(R.id.incubadoraTV);
         final Button monitoreoButton = (Button) findViewById(R.id.asistenciaBT);
         final Button reporteButton = (Button) findViewById(R.id.monitoreoBT);
 
