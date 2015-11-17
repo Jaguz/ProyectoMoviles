@@ -20,7 +20,7 @@ public class encuesta extends AppCompatActivity {
         final Bundle datos = getIntent().getExtras();
 
         final Button terminarButton = (Button) findViewById(R.id.terminarBT);
-        final TextView nombre = (TextView) findViewById(R.id.incubadoraTV);
+        final TextView nombre = (TextView) findViewById(R.id.nombreTV);
         nombre.setText(datos.getString("nombre"));
 
         View.OnClickListener terminar = new View.OnClickListener(){

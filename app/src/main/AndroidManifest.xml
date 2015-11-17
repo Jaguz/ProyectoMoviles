@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="itesm.mx.proyectomoviles" >
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -50,6 +52,10 @@
         <activity
             android:name=".encuesta"
             android:label="@string/title_activity_encuesta" >
+        </activity>
+        <activity
+            android:name=".RevisionAsistencia"
+            android:label="@string/title_activity_revision_asistencia" >
         </activity>
     </application>
 

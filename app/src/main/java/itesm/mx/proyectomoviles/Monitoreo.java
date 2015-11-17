@@ -14,7 +14,7 @@ public class Monitoreo extends AppCompatActivity {
         setContentView(R.layout.activity_monitoreo);
         final Bundle datos = getIntent().getExtras();
 
-        final TextView nombreproy = (TextView) findViewById(R.id.incubadoraTV);
+        final TextView nombreproy = (TextView) findViewById(R.id.nombreTV);
 
         nombreproy.setText(datos.getString("nombre"));
 

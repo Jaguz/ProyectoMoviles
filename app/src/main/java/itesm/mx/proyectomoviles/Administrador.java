@@ -32,7 +32,7 @@ public class Administrador extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrador);
-        final TextView mensaje = (TextView) findViewById(R.id.incubadoraTV);
+        final TextView mensaje = (TextView) findViewById(R.id.nombreTV);
         proyectoLV =(ListView) findViewById(R.id.listViewProyecto);
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         cargarBT = (Button) findViewById(R.id.proyectosBT);
