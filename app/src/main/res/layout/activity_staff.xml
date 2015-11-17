@@ -24,4 +24,12 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView9"
         android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cargar Proyectos"
+        android:id="@+id/proyectosBT"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
