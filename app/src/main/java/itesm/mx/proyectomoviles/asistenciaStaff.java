@@ -14,7 +14,7 @@ public class asistenciaStaff extends AppCompatActivity {
         setContentView(R.layout.activity_asistencia_staff);
 
         final Bundle datos = getIntent().getExtras();
-        final TextView nombre = (TextView) findViewById(R.id.incubadoraTV);
+        final TextView nombre = (TextView) findViewById(R.id.nombreTV);
 
         nombre.setText(datos.getString("nombre"));
 

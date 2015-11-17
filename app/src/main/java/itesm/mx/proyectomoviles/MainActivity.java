@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent (MainActivity.this, RevisionAsistencia.class);
+                Intent intent = new Intent (MainActivity.this, proyectoIn.class);
                 Intent intent2 = new Intent (MainActivity.this, Staff.class);
                 String mail = userET.getText().toString();
                 String password = passET.getText().toString();

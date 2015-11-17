@@ -2,38 +2,49 @@ package itesm.mx.proyectomoviles;
 
 /**
  * Created by Javier on 11/16/2015.
- */import java.util.ArrayList;
+ */
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class TableMainLayout extends RelativeLayout {
 
     public final String TAG = "TableMainLayout.java";
 
     // set the header titles
-    String headers[] = {
-            "Header 1 n multi-lines",
-            "Header 2",
-            "Header 3",
-            "Header 4",
-            "Header 5",
-            "Header 6",
-            "Header 7",
-            "Header 8",
-            "Header 9"
-    };
-
+    String headers[]/* = {
+            "PROYECTO   ",
+            "(Agosto 31 - Septiembre 5)",
+            "(Septiembre 7 - 12)",
+            "(Septiembre 14 - 19)",
+            "(Septiembre 28 - Octubre 3)",
+            "(Octubre 5 - 10)",
+            "(Octubre 12 - 17)",
+            "(Octubre 19 - 24)",
+            "(Octubre 26 - 31)"
+    }*/;
+    List<String> fechas = new ArrayList<String>();
+    List<String> proyectos = new ArrayList<String>();
     TableLayout tableA;
     TableLayout tableB;
     TableLayout tableC;
@@ -47,71 +58,166 @@ public class TableMainLayout extends RelativeLayout {
 
     Context context;
 
-    List<SampleObject> sampleObjects = this.sampleObjects();
+    List<SampleObject> sampleObjects = new ArrayList<SampleObject>();
 
-    int headerCellsWidth[] = new int[headers.length];
+    int headerCellsWidth[];
 
-    public TableMainLayout(Context context) {
+    public TableMainLayout(Context contex) {
 
-        super(context);
+        super(contex);
 
-        this.context = context;
+        this.context = contex;
 
+
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        fechas.add("PROYECTO    ");
+        setBackgroundColor(Color.BLUE);
+        new DownloadWebpageTask(new AsyncResult() {
+            @Override
+            public void onResult(JSONObject object) {
+                try {
+                    JSONArray rows = object.getJSONArray("rows");
+
+                    for (int r = 0; r < rows.length(); ++r) {
+                        JSONObject row = rows.getJSONObject(r);
+                        JSONArray columns = row.getJSONArray("c");
+                        String nombre = columns.getJSONObject(1).getString("v");
+                        String fecha = columns.getJSONObject(2).getString("v");
+                        boolean flag = false;
+                        for(int j=0; j<fechas.size(); j++){
+                            if(fechas.get(j).equals(fecha)){
+                                flag=true;
+                            }
+                        }
+                        if(!flag){
+                            //Toast.makeText(context, fecha, Toast.LENGTH_SHORT).show();
+                            fechas.add(fecha);
+                        }
+                        String proyect = columns.getJSONObject(3).getString("v");
+                        //Proyecto proyecto = new Proyecto(nombre, lugar, proyect);
+                        //proyectos.add(proyecto);
+                    }
+                    for (int r = 0; r < rows.length(); ++r) {
+                        JSONObject row = rows.getJSONObject(r);
+                        JSONArray columns = row.getJSONArray("c");
+                        String nombre = columns.getJSONObject(3).getString("v");
+                        String fecha = columns.getJSONObject(2).getString("v");
+                        String asistencia = columns.getJSONObject(1).getString("v");
+                        boolean flag = false;
+                            for(int i=0; i<proyectos.size(); i++){
+                                if(proyectos.get(i).equals(nombre)){
+                                    flag=true;
+                                }
+                            }
+                        if(!flag){
+                            //Toast.makeText(context, fecha, Toast.LENGTH_SHORT).show();
+                            proyectos.add(nombre);
+                        }
+                        String proyect = columns.getJSONObject(3).getString("v");
+                        //Proyecto proyecto = new Proyecto(nombre, lugar, proyect);
+                        //proyectos.add(proyecto);
+                    }
+
+                    String mat[][] = new String[proyectos.size()][fechas.size()];
+                    for(int j=0; j<proyectos.size(); j++) {
+
+                        for (int i = 0; i < fechas.size(); i++) {
+                            mat[j][i]=" ";
+                        }
+                    }
+                    for (int r = 0; r < rows.length(); ++r) {
+                        JSONObject row = rows.getJSONObject(r);
+                        JSONArray columns = row.getJSONArray("c");
+                        String nombre = columns.getJSONObject(3).getString("v");
+                        String fecha = columns.getJSONObject(2).getString("v");
+                        String asistencia = columns.getJSONObject(1).getString("v");
+                        boolean flag = false;
+                        for(int i=0; i<proyectos.size(); i++){
+                            for(int j=0; j<fechas.size(); j++){
+                                if(proyectos.get(i).equals(nombre)&&fechas.get(j).equals(fecha)){
+                                    mat[i][j] = asistencia;
+                                }
+                            }
+                        }
+                    }
+                    for(int j=0; j<proyectos.size(); j++){
+                        SampleObject so = new SampleObject(proyectos.get(j), new ArrayList<String>());
+                        for(int i=1; i<fechas.size(); i++){
+                            so.asistencias.add(mat[j][i]);
+                        }
+                        sampleObjects.add(so);
+                    }
+                    headerCellsWidth = new int[fechas.size()];
+                    //adapter = new ListViewAdapter(this, R.layout.row, proyectos);
+                    //proyectoLV.setAdapter(adapter);
+
+                    initComponents();
+                    setComponentsId();
+                    setScrollViewAndHorizontalScrollViewTag();
+
+
+                    // no need to assemble component A, since it is just a table
+                    horizontalScrollViewB.addView(tableB);
+
+                    scrollViewC.addView(tableC);
+
+                    scrollViewD.addView(horizontalScrollViewD);
+                    horizontalScrollViewD.addView(tableD);
+
+                    // add the components to be part of the main layout
+                    addComponentToMainLayout();
+                    setBackgroundColor(Color.BLUE);
+
+                    // add some table rows
+                    addTableRowToTableA();
+                    addTableRowToTableB();
+
+                    resizeHeaderHeight();
+
+                    getTableRowHeaderCellWidth();
+
+                    generateTableC_AndTable_B();
+
+                    resizeBodyTableRowHeight();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).execute("https://spreadsheets.google.com/tq?key=1ECcVX2RlkyILoUxpX5eVbtt8gfo7GgdyGAJKxhT8JVk");
         // initialize the main components (TableLayouts, HorizontalScrollView, ScrollView)
-        this.initComponents();
-        this.setComponentsId();
-        this.setScrollViewAndHorizontalScrollViewTag();
 
 
-        // no need to assemble component A, since it is just a table
-        this.horizontalScrollViewB.addView(this.tableB);
-
-        this.scrollViewC.addView(this.tableC);
-
-        this.scrollViewD.addView(this.horizontalScrollViewD);
-        this.horizontalScrollViewD.addView(this.tableD);
-
-        // add the components to be part of the main layout
-        this.addComponentToMainLayout();
-        this.setBackgroundColor(Color.RED);
-
-
-        // add some table rows
-        this.addTableRowToTableA();
-        this. addTableRowToTableB();
-
-        this.resizeHeaderHeight();
-
-        this.getTableRowHeaderCellWidth();
-
-        this.generateTableC_AndTable_B();
-
-        this.resizeBodyTableRowHeight();
     }
 
     // this is just the sample data
     List<SampleObject> sampleObjects(){
-
+    /*
         List<SampleObject> sampleObjects = new ArrayList<SampleObject>();
 
-        for(int x=1; x<=20; x++){
+        for(int x=1; x<=30; x++){
 
             SampleObject sampleObject = new SampleObject(
-                    "Col 1, Row " + x,
-                    "Col 2, Row " + x + " - multi-lines",
-                    "Col 3, Row " + x,
-                    "Col 4, Row " + x,
-                    "Col 5, Row " + x,
-                    "Col 6, Row " + x,
-                    "Col 7, Row " + x,
-                    "Col 8, Row " + x,
-                    "Col 9, Row " + x
+                    "Proyecto " + x,
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11"
             );
 
             sampleObjects.add(sampleObject);
         }
-
+*/
         return sampleObjects;
+
 
     }
 
@@ -190,7 +296,7 @@ public class TableMainLayout extends RelativeLayout {
     TableRow componentATableRow(){
 
         TableRow componentATableRow = new TableRow(this.context);
-        TextView textView = this.headerTextView(this.headers[0]);
+        TextView textView = this.headerTextView(this.fechas.get(0));
         componentATableRow.addView(textView);
 
         return componentATableRow;
@@ -200,13 +306,13 @@ public class TableMainLayout extends RelativeLayout {
     TableRow componentBTableRow(){
 
         TableRow componentBTableRow = new TableRow(this.context);
-        int headerFieldCount = this.headers.length;
+        int headerFieldCount = this.fechas.size();
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT);
         params.setMargins(2, 0, 0, 0);
 
         for(int x=0; x<(headerFieldCount-1); x++){
-            TextView textView = this.headerTextView(this.headers[x+1]);
+            TextView textView = this.headerTextView(this.fechas.get(x+1));
             textView.setLayoutParams(params);
             componentBTableRow.addView(textView);
         }
@@ -244,7 +350,7 @@ public class TableMainLayout extends RelativeLayout {
 
         TableRow tableRowForTableC = new TableRow(this.context);
         TextView textView = this.bodyTextView(sampleObject.header1);
-        tableRowForTableC.addView(textView,params);
+        tableRowForTableC.addView(textView, params);
 
         return tableRowForTableC;
     }
@@ -254,23 +360,19 @@ public class TableMainLayout extends RelativeLayout {
         TableRow taleRowForTableD = new TableRow(this.context);
 
         int loopCount = ((TableRow)this.tableB.getChildAt(0)).getChildCount();
-        String info[] = {
-                sampleObject.header2,
-                sampleObject.header3,
-                sampleObject.header4,
-                sampleObject.header5,
-                sampleObject.header6,
-                sampleObject.header7,
-                sampleObject.header8,
-                sampleObject.header9
-        };
+        List<String> info = sampleObject.asistencias;
 
         for(int x=0 ; x<loopCount; x++){
             TableRow.LayoutParams params = new TableRow.LayoutParams( headerCellsWidth[x+1],LayoutParams.MATCH_PARENT);
             params.setMargins(2, 2, 0, 0);
-
-            TextView textViewB = this.bodyTextView(info[x]);
-            taleRowForTableD.addView(textViewB,params);
+            TextView textViewB;
+            if(x<info.size()) {
+                textViewB = this.bodyTextView(info.get(x));
+            }
+            else{
+                textViewB = this.bodyTextView(" ");
+            }
+            taleRowForTableD.addView(textViewB, params);
         }
 
         return taleRowForTableD;
