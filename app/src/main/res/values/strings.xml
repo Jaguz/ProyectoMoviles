@@ -12,4 +12,5 @@
     <string name="title_activity_proyecto_in_staff">proyectoInStaff</string>
     <string name="title_activity_asistencia_staff">asistenciaStaff</string>
     <string name="title_activity_encuesta">encuesta</string>
+    <string name="title_activity_revision_asistencia">RevisionAsistencia</string>
 </resources>

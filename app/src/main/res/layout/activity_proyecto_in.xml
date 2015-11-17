@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nombre"
-        android:id="@+id/nombreTV"
+        android:id="@+id/incubadoraTV"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/asistenciaBT"
         android:layout_alignParentEnd="true"
@@ -34,7 +34,7 @@
         android:text="Asistencia"
         android:id="@+id/asistenciaBT"
         android:layout_marginTop="106dp"
-        android:layout_below="@+id/nombreTV"
+        android:layout_below="@+id/incubadoraTV"
         android:layout_alignStart="@+id/monitoreoBT" />
 
     <Button
