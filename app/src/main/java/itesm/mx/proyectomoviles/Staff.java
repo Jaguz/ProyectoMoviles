@@ -37,13 +37,8 @@ public class Staff extends AppCompatActivity {
 
         proyectoLV =(ListView) findViewById(R.id.ListaStaff);
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        cargarBT = (Button) findViewById(R.id.proyectosBT);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            cargarBT.setEnabled(true);
-        } else {
-            cargarBT.setEnabled(false);
-        }
+
 
         Bundle datos = getIntent().getExtras();
 
@@ -60,8 +55,9 @@ public class Staff extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent (Staff.this, proyectoInStaff.class);
                 Proyecto proyecto = adapter.getItem(position);
-                intent.putExtra("lugar", proyecto.getEspacio());
-                intent.putExtra("nombre", proyecto.getIncubadora());
+                intent.putExtra("espacio", proyecto.getEspacio());
+                intent.putExtra("proyecto", proyecto.getProyecto());
+                intent.putExtra("incubadora", proyecto.getIncubadora());
                 startActivity(intent);
             }
         };
