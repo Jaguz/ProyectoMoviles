@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class ListViewAdapter extends ArrayAdapter<Proyecto> {
     List<Proyecto> proyectoList;
 
 
-    public ListViewAdapter(Context context, int idResource, List<Proyecto> proyectos) {
+    public ListViewAdapter(Context context, int idResource, ArrayList<Proyecto> proyectos) {
         super(context, idResource, proyectos);
         this.context= context;
         this.layoutResourceId= idResource;
