@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#2E39B1">
+    android:background="#2E39B1"
+    android:id="@+id/layoutID">
 
     <TextView
         android:layout_width="wrap_content"
@@ -9,18 +10,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Incubadora Social: "
         android:id="@+id/textView3"
+        android:textColor="#ffffff"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#ffffff" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/espacioTV"
-        android:layout_alignBaseline="@+id/lugar"
-        android:layout_alignBottom="@+id/lugar"
-        android:layout_toEndOf="@+id/textView3" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,16 +21,8 @@
         android:text="Espacio Formativo:"
         android:id="@+id/lugar"
         android:textColor="#ffffff"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/incubadoraTV"
         android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/nombreTV"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView3" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,17 +31,35 @@
         android:text="Proyecto:"
         android:id="@+id/textView5"
         android:textColor="#ffffff"
-        android:layout_alignBaseline="@+id/proyectoTV"
-        android:layout_alignBottom="@+id/proyectoTV"
+        android:layout_below="@+id/espacioTV"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/proyectoTV"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/espacioTV"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/incubadoraTV"
+        android:layout_marginStart="27dp"
+        android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/lugar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/espacioTV"
+        android:layout_below="@+id/incubadoraTV"
+        android:layout_alignStart="@+id/incubadoraTV" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/proyectoTV"
+        android:layout_below="@+id/espacioTV"
+        android:layout_alignStart="@+id/espacioTV" />
 
 </RelativeLayout>

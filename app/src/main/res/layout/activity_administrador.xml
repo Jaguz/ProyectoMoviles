@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="*"
-        android:id="@+id/nombreTV"
+        android:id="@+id/proyectoTV"
         android:layout_alignBaseline="@+id/bienvenidoTV"
         android:layout_alignBottom="@+id/bienvenidoTV"
         android:layout_toEndOf="@+id/bienvenidoTV"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:text="Cargar Proyectos"
         android:id="@+id/proyectosBT"
-        android:layout_alignTop="@+id/nombreTV"
+        android:layout_alignTop="@+id/proyectoTV"
         android:layout_alignEnd="@+id/listViewProyecto" />
 
 </RelativeLayout>
