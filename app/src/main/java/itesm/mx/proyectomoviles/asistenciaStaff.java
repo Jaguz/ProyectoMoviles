@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-import org.apache.http.*;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +29,7 @@ import org.json.JSONObject;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -44,15 +46,16 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
     List<Model> list = new ArrayList<Model>();
     List<String> fechas = new ArrayList<String>();
     ArrayAdapter<String> spin_adapter;
-
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asistencia_staff);
+
         alumnosLV = (ListView) findViewById(R.id.listaAlumnos);
         Button guardarBtn = (Button) findViewById(R.id.guardarBtn);
-        final Context context = this;
+        context = this;
 
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -100,47 +103,32 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(asistenciaStaff.this, "Se han grabado " +Integer.toString(adapter.counter)+" asistencias.", Toast.LENGTH_LONG).show();
-                HttpsURLConnection connection = null;
                 String str1 = Integer.toString(adapter.counter);
                 String str2 = spinner.getSelectedItem().toString();
                 String str3 = datos.getString("proyecto");
                 String str4 = datos.getString("incubadora");
                 String str5 = datos.getString("espacio");
-
-                String urlParameters =  "entry_1579137901" + URLEncoder.encode(str1)+"&"+
-                                        "entry_1621524700" + URLEncoder.encode(str2)+"&"+
-                                        "entry_995735811" + URLEncoder.encode(str3)+"&"+
-                                        "entry_1657960210" + URLEncoder.encode(str4)+"&"+
-                                        "entry_1376801195" + URLEncoder.encode(str5);
+                String urlParameters="";
+                boolean res= true;
                 try {
-                    URL myUrl = new URL("https://docs.google.com/forms/d/1BE2CjR-kFxHqn1-h7TxISGzebAsR-itdAPeC_bPYSNo/formResponse");
-                    connection = (HttpsURLConnection) myUrl.openConnection();
-                    connection.setRequestMethod("POST");
-                    connection.setRequestProperty("Content-Type",
-                            "application/x-www-form-urlencoded");
+                    urlParameters = "entry_1579137901=" + URLEncoder.encode(str1) + "&" +
+                            "entry_1621524700=" + URLEncoder.encode(str2, "UTF-8") + "&" +
+                            "entry_995735811=" + URLEncoder.encode(str3, "UTF-8") + "&" +
+                            "entry_1657960210=" + URLEncoder.encode(str4, "UTF-8") + "&" +
+                            "entry_1376801195=" + URLEncoder.encode(str5, "UTF-8");
+                    new PostTask(new AsyncResult() {
+                        @Override
+                        public void onResult(JSONObject object) {
 
-                    connection.setRequestProperty("Content-Length", "" +
-                            Integer.toString(urlParameters.getBytes().length));
-                    connection.setRequestProperty("Content-Language", "en-US");
-
-                    connection.setUseCaches (false);
-                    connection.setDoInput(true);
-                    connection.setDoOutput(true);
-
-                    //Send request
-                    DataOutputStream wr = new DataOutputStream(
-                            connection.getOutputStream ());
-                    wr.writeBytes (urlParameters);
-                    wr.flush ();
-                    wr.close ();
-                    finish();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }finally {
-                    if(null!=connection)
-                        connection.disconnect();
+                        }
+                    }).execute(urlParameters);
                 }
+                catch (UnsupportedEncodingException ex) {
+                    Toast.makeText(asistenciaStaff.this,"D=", Toast.LENGTH_LONG).show();
+                }
+               System.out.println(urlParameters);
+                Toast.makeText(asistenciaStaff.this, "Se han grabado " +Integer.toString(adapter.counter)+" asistencias.", Toast.LENGTH_LONG).show();
+
                 finish();
             }
         };
@@ -148,7 +136,6 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
     }
 
     private void processJson(JSONObject object) {
-
         try {
             final Bundle datos = getIntent().getExtras();
             JSONArray rows = object.getJSONArray("rows");
@@ -215,5 +202,57 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public class PostTask extends AsyncTask<String, Void, Boolean> {
+        AsyncResult callback;
+
+        public PostTask(AsyncResult callback) {
+            this.callback = callback;
+        }
+
+        @Override
+        protected Boolean doInBackground(String... param) {
+
+            HttpsURLConnection connection = null;
+            Boolean result = true;
+
+            try {
+                URL myUrl = new URL("https://docs.google.com/forms/d/1BE2CjR-kFxHqn1-h7TxISGzebAsR-itdAPeC_bPYSNo/formResponse");
+                connection = (HttpsURLConnection) myUrl.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("User-Agent", "ProyectoMoviles/1.0");
+                connection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+
+                //connection.setRequestProperty("Content-Length", "" +
+                //Integer.toString(urlParameters.getBytes().length));
+                //connection.setRequestProperty("Content-Language", "en-US");
+
+                //connection.setUseCaches (false);
+                connection.setDoOutput(true);
+
+                //Send request
+                DataOutputStream wr = new DataOutputStream(
+                        connection.getOutputStream ());
+                wr.writeBytes (param[0]);
+                wr.flush ();
+                wr.close ();
+                System.out.println("Response Code : " + connection.getResponseCode());
+            }catch (Exception e){
+                result = false;
+                e.printStackTrace();
+            }finally {
+                if(null!=connection)
+                    connection.disconnect();
+            }
+            return result;
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        protected void onPostExecute(Boolean result){
+            //Print Success or failure message accordingly
+            Toast.makeText(context, result ? "Message successfully sent!" : "There was some error in sending message. Please try again after some time.", Toast.LENGTH_LONG).show();
+        }
     }
 }
