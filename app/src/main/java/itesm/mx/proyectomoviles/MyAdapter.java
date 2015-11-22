@@ -42,7 +42,7 @@ public class MyAdapter extends ArrayAdapter<Model> {
             LayoutInflater inflator = context.getLayoutInflater();
             convertView = inflator.inflate(R.layout.rowasistencia, null);
             viewHolder = new ViewHolder();
-            viewHolder.text = (TextView) convertView.findViewById(R.id.proyectoTV);
+            viewHolder.text = (TextView) convertView.findViewById(R.id.nameTV);
             viewHolder.checkbox = (CheckBox) convertView.findViewById(R.id.checkBox1);
             viewHolder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -55,7 +55,7 @@ public class MyAdapter extends ArrayAdapter<Model> {
                 }
             });
             convertView.setTag(viewHolder);
-            convertView.setTag(R.id.proyectoTV, viewHolder.text);
+            convertView.setTag(R.id.nameTV, viewHolder.text);
             convertView.setTag(R.id.checkBox1, viewHolder.checkbox);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

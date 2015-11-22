@@ -39,7 +39,7 @@ public class ListViewAdapter extends ArrayAdapter<Proyecto> {
 
         TextView incubadora = (TextView) row.findViewById(R.id.incubadoraTV);
         TextView espacio = (TextView) row.findViewById(R.id.espacioTV);
-        TextView proyect = (TextView) row.findViewById(R.id.proyectoTV);
+        TextView proyect = (TextView) row.findViewById(R.id.nameTV);
 
         Proyecto proyecto = proyectoList.get(position);
         incubadora.setText(proyecto.getIncubadora());
