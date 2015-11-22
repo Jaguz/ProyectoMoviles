@@ -20,38 +20,70 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="*"
-        android:id="@+id/proyectoTV"
+        android:text="name"
+        android:id="@+id/nameTV"
         android:layout_alignBaseline="@+id/bienvenidoTV"
         android:layout_alignBottom="@+id/bienvenidoTV"
         android:layout_toEndOf="@+id/bienvenidoTV"
         android:layout_marginStart="18dp"
         android:textColor="#ffffff" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Selecciona un proyecto:"
-        android:id="@+id/textView2"
-        android:layout_marginTop="58dp"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/proyectosBT"
-        android:layout_alignParentStart="true" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listViewProyecto"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView2" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cargar Proyectos"
+        android:text="Ver Asistencias"
         android:id="@+id/proyectosBT"
-        android:layout_alignTop="@+id/proyectoTV"
-        android:layout_alignEnd="@+id/listViewProyecto" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="59dp" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinInc"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinEsp"
+        android:layout_below="@+id/textView7"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinProy"
+        android:layout_below="@+id/textView10"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Incubadora Social"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/bienvenidoTV"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Espacio Formativo"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/spinInc"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Proyecto"
+        android:id="@+id/textView10"
+        android:layout_below="@+id/spinEsp"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

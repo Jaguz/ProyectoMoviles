@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nombre del proyecto"
-        android:id="@+id/proyectoTV"
+        android:id="@+id/nameTV"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:textColor="#ffffff" />
@@ -23,7 +23,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Pregunta 1:"
         android:id="@+id/textView13"
-        android:layout_below="@+id/proyectoTV"
+        android:layout_below="@+id/nameTV"
         android:layout_alignParentStart="true"
         android:layout_marginTop="35dp"
         android:textColor="#FFFFFFFF" />

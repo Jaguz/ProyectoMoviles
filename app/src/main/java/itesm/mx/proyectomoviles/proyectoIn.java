@@ -19,7 +19,7 @@ public class proyectoIn extends AppCompatActivity {
         setContentView(R.layout.activity_proyecto_in);
 
         final Bundle datos = getIntent().getExtras();
-        final TextView nombre = (TextView) findViewById(R.id.proyectoTV);
+        final TextView nombre = (TextView) findViewById(R.id.nameTV);
         final Button asistenciaButton = (Button) findViewById(R.id.asistenciaBT);
         final Button monitoreoButton = (Button) findViewById(R.id.monitoreoBT);
 
@@ -29,7 +29,7 @@ public class proyectoIn extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(proyectoIn.this, RevisionAsistencia.class);
+                Intent intent = new Intent(proyectoIn.this, Administrador.class);
                 intent.putExtra("username", datos.getString("username"));
                 startActivityForResult(intent,1);
             }

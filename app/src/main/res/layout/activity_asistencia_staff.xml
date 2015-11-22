@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nombre"
-        android:id="@+id/proyectoTV"
+        android:id="@+id/nameTV"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:textColor="#FFFFFFFF" />

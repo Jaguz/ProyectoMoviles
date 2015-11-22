@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,9 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -68,7 +65,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
         }).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
 
         final Bundle datos = getIntent().getExtras();
-        final TextView nombre = (TextView) findViewById(R.id.proyectoTV);
+        final TextView nombre = (TextView) findViewById(R.id.nameTV);
         nombre.setText(datos.getString("proyecto"));
 
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -162,7 +159,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
     }
     @Override
     public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
-        TextView label = (TextView) v.getTag(R.id.proyectoTV);
+        TextView label = (TextView) v.getTag(R.id.nameTV);
         CheckBox checkbox = (CheckBox) v.getTag(R.id.checkBox1);
         Toast.makeText(v.getContext(), label.getText().toString()+" "+isCheckedOrNot(checkbox), Toast.LENGTH_LONG).show();
     }
