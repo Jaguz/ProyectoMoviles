@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivityForResult(intent,1);
                 }
                 else{
-                    intent.putExtra("username", mail);
-                    intent.putExtra("password", password);
+                    intent2.putExtra("username", mail);
+                    intent2.putExtra("password", password);
                     startActivityForResult(intent2,1);
                 }
 
