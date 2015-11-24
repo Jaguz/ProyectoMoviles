@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nombre del Proyecto"
-        android:id="@+id/incubadoraTV"
+        android:id="@+id/nameTV"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:textColor="#FFFFFFFF" />
@@ -23,7 +23,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Lista de Problemas:"
         android:id="@+id/textView8"
-        android:layout_below="@+id/incubadoraTV"
+        android:layout_below="@+id/nameTV"
         android:layout_alignParentStart="true"
         android:textColor="#FFFFFFFF" />
 

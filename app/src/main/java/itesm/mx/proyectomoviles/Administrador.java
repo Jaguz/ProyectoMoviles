@@ -11,8 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -20,56 +22,70 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Administrador extends AppCompatActivity {
     private static final String LOG_TAG = "";
-    ArrayList<Proyecto> proyectos = new ArrayList<Proyecto>();
-    ListView proyectoLV;
+    List<String> proyectos = new ArrayList<String>();
+    List<String> espacios = new ArrayList<String>();
+    List<String> incubadoras = new ArrayList<String>();
+    ArrayAdapter<String> proyAdapter;
+    ArrayAdapter<String> espAdapter;
+    ArrayAdapter<String> incAdapter;
     Button cargarBT;
-    ListViewAdapter adapter;
-
+    Context context;
+    Spinner incSpin;
+    Spinner espSpin;
+    Spinner proySpin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrador);
-        final TextView mensaje = (TextView) findViewById(R.id.incubadoraTV);
-        proyectoLV =(ListView) findViewById(R.id.listViewProyecto);
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        context = this;
+        TextView nameTV = (TextView) findViewById(R.id.nameTV);
         cargarBT = (Button) findViewById(R.id.proyectosBT);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            cargarBT.setEnabled(true);
-        } else {
-            cargarBT.setEnabled(false);
-        }
+        incSpin = (Spinner) findViewById(R.id.spinInc);
+        espSpin = (Spinner) findViewById(R.id.spinEsp);
+        proySpin = (Spinner) findViewById(R.id.spinProy);
 
-        Bundle datos = getIntent().getExtras();
 
-        try{
-            mensaje.setText(datos.getString("username"));
+        final Bundle datos = getIntent().getExtras();
+        nameTV.setText(datos.getString("username"));
 
-        }catch(Exception e){
-            Log.e(LOG_TAG, "Failed to display message", e);
-        }
+        proyectos.add("-");
+        espacios.add("-");
+        incubadoras.add("-");
+
+        final View.OnClickListener verAsistencia = new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String incubadora = " ";
+                String espacio = " ";
+                String proyecto = " ";
+                incubadora = incSpin.getSelectedItem().toString();
+                espacio = espSpin.getSelectedItem().toString();
+                proyecto = proySpin.getSelectedItem().toString();
+                Intent intent = new Intent (Administrador.this, RevisionAsistencia.class);
+                intent.putExtra("username", datos.getString("username"));
+                intent.putExtra("incubadora", incubadora);
+                intent.putExtra("espacio", espacio);
+                intent.putExtra("proyecto", proyecto);
+                startActivityForResult(intent, 1);
+            }
+        };
 
         new DownloadWebpageTask(new AsyncResult() {
             @Override
             public void onResult(JSONObject object) {
                 processJson(object);
+                cargarBT.setOnClickListener(verAsistencia);
             }
         }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
 
-        final AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent (Administrador.this, proyectoIn.class);
-                Proyecto proyecto = adapter.getItem(position);
-                intent.putExtra("lugar", proyecto.getEspacio());
-                intent.putExtra("nombre", proyecto.getIncubadora());
-                startActivity(intent);
-            }
-        };
-        proyectoLV.setOnItemClickListener(itemListener);
+
+
+
     }
 
     private void processJson(JSONObject object) {
@@ -81,15 +97,35 @@ public class Administrador extends AppCompatActivity {
                 JSONObject row = rows.getJSONObject(r);
                 JSONArray columns = row.getJSONArray("c");
 
-                String nombre = columns.getJSONObject(1).getString("v");
-                String lugar = columns.getJSONObject(2).getString("v");
+                String inc = columns.getJSONObject(1).getString("v");
+                String esp = columns.getJSONObject(2).getString("v");
                 String proyect = columns.getJSONObject(3).getString("v");
-                Proyecto proyecto = new Proyecto(nombre, lugar, proyect);
-                proyectos.add(proyecto);
+                boolean flag = false;
+                for(int i=0; i<proyectos.size(); i++){
+                    if(proyectos.get(i).equals(proyect)) flag = true;
+                }
+                if(!flag)proyectos.add(proyect);
+                flag = false;
+                for(int i=0; i<espacios.size(); i++){
+                    if(espacios.get(i).equals(esp)) flag = true;
+                }
+                if(!flag)espacios.add(esp);
+                flag = false;
+                for(int i=0; i<incubadoras.size(); i++){
+                    if(incubadoras.get(i).equals(inc)) flag = true;
+                }
+                if(!flag)incubadoras.add(inc);
             }
 
-            adapter = new ListViewAdapter(this, R.layout.row, proyectos);
-            proyectoLV.setAdapter(adapter);
+            incAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, incubadoras);
+            incAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            incSpin.setAdapter(incAdapter);
+            espAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, espacios);
+            espAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            espSpin.setAdapter(espAdapter);
+            proyAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, proyectos);
+            proyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            proySpin.setAdapter(proyAdapter);
 
         } catch (JSONException e) {
             e.printStackTrace();

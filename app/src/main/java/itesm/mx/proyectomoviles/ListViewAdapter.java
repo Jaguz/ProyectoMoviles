@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class ListViewAdapter extends ArrayAdapter<Proyecto> {
     List<Proyecto> proyectoList;
 
 
-    public ListViewAdapter(Context context, int idResource, List<Proyecto> proyectos) {
+    public ListViewAdapter(Context context, int idResource, ArrayList<Proyecto> proyectos) {
         super(context, idResource, proyectos);
         this.context= context;
         this.layoutResourceId= idResource;
@@ -35,9 +36,10 @@ public class ListViewAdapter extends ArrayAdapter<Proyecto> {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layoutResourceId, parent, false);
         }
+
         TextView incubadora = (TextView) row.findViewById(R.id.incubadoraTV);
         TextView espacio = (TextView) row.findViewById(R.id.espacioTV);
-        TextView proyect = (TextView) row.findViewById(R.id.proyectoTV);
+        TextView proyect = (TextView) row.findViewById(R.id.nameTV);
 
         Proyecto proyecto = proyectoList.get(position);
         incubadora.setText(proyecto.getIncubadora());

@@ -1,6 +1,5 @@
 package itesm.mx.proyectomoviles;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,15 +19,14 @@ public class encuesta extends AppCompatActivity {
         final Bundle datos = getIntent().getExtras();
 
         final Button terminarButton = (Button) findViewById(R.id.terminarBT);
-        final TextView nombre = (TextView) findViewById(R.id.incubadoraTV);
+        final TextView nombre = (TextView) findViewById(R.id.nameTV);
         nombre.setText(datos.getString("nombre"));
 
         View.OnClickListener terminar = new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(encuesta.this, Staff.class);
-                startActivityForResult(intent,1);
+                finish();
             }
         };
 

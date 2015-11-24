@@ -19,21 +19,18 @@ public class proyectoIn extends AppCompatActivity {
         setContentView(R.layout.activity_proyecto_in);
 
         final Bundle datos = getIntent().getExtras();
-        final TextView nombre = (TextView) findViewById(R.id.incubadoraTV);
-        final TextView lugar = (TextView) findViewById(R.id.incubadoraTV);
-        final Button monitoreoButton = (Button) findViewById(R.id.asistenciaBT);
-        final Button reporteButton = (Button) findViewById(R.id.monitoreoBT);
+        final TextView nombre = (TextView) findViewById(R.id.nameTV);
+        final Button asistenciaButton = (Button) findViewById(R.id.asistenciaBT);
+        final Button monitoreoButton = (Button) findViewById(R.id.monitoreoBT);
 
-        nombre.setText(datos.getString("nombre"));
-        lugar.setText(datos.getString("lugar"));
+        nombre.setText(datos.getString("username"));
 
-        View.OnClickListener monitoreo = new View.OnClickListener(){
+        View.OnClickListener asistencia = new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(proyectoIn.this, Monitoreo.class);
-                intent.putExtra("lugar", datos.getString("lugar"));
-                intent.putExtra("nombre", datos.getString("nombre"));
+                Intent intent = new Intent(proyectoIn.this, Administrador.class);
+                intent.putExtra("username", datos.getString("username"));
                 startActivityForResult(intent,1);
             }
         };
@@ -43,13 +40,12 @@ public class proyectoIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(proyectoIn.this, Issues.class);
-                intent.putExtra("lugar", datos.getString("lugar"));
-                intent.putExtra("nombre", datos.getString("nombre"));
+                intent.putExtra("username", datos.getString("username"));
                 startActivityForResult(intent,1);
             }
         };
-        reporteButton.setOnClickListener(reporte);
-        monitoreoButton.setOnClickListener(monitoreo);
+        asistenciaButton.setOnClickListener(asistencia);
+        monitoreoButton.setOnClickListener(reporte);
 
 
     }

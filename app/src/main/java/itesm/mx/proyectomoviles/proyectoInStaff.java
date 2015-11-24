@@ -20,19 +20,22 @@ public class proyectoInStaff extends AppCompatActivity {
 
         final Button monitoreoButton = (Button) findViewById(R.id.monitoreoBT);
         final Button asistenciaButton = (Button) findViewById(R.id.asistenciaBT);
-        final TextView nombre = (TextView) findViewById(R.id.incubadoraTV);
+        final TextView nombre = (TextView) findViewById(R.id.nameTV);
         final TextView lugar = (TextView) findViewById(R.id.espacioTV);
+        final TextView incubadora = (TextView) findViewById(R.id.layoutID);
 
-        nombre.setText(datos.getString("nombre"));
-        lugar.setText(datos.getString("lugar"));
+        nombre.setText(datos.getString("proyecto"));
+        lugar.setText(datos.getString("espacio"));
+        incubadora.setText(datos.getString("incubadora"));
 
         View.OnClickListener encuesta = new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(proyectoInStaff.this, encuesta.class);
-                intent.putExtra("lugar", datos.getString("lugar"));
-                intent.putExtra("nombre", datos.getString("nombre"));
+                intent.putExtra("proyecto", datos.getString("proyecto"));
+                intent.putExtra("espacio", datos.getString("espacio"));
+                intent.putExtra("incubadora", datos.getString("incubadora"));
                 startActivityForResult(intent,1);
             }
         };
@@ -42,8 +45,9 @@ public class proyectoInStaff extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(proyectoInStaff.this, asistenciaStaff.class);
-                intent.putExtra("lugar", datos.getString("lugar"));
-                intent.putExtra("nombre", datos.getString("nombre"));
+                intent.putExtra("proyecto", datos.getString("proyecto"));
+                intent.putExtra("espacio", datos.getString("espacio"));
+                intent.putExtra("incubadora", datos.getString("incubadora"));
                 startActivityForResult(intent,1);
             }
         };
