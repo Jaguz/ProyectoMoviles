@@ -29,18 +29,18 @@ public class Staff extends AppCompatActivity {
     ListView proyectoLV;
     Button cargarBT;
     ListViewAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff);
-
         proyectoLV =(ListView) findViewById(R.id.ListaStaff);
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
 
-        Bundle datos = getIntent().getExtras();
+        final TextView nombreUsuario = (TextView) findViewById(R.id.nombreTV);
+        final Bundle datos = getIntent().getExtras();
+        nombreUsuario.setText(datos.getString("username"));
 
 
         new DownloadWebpageTask(new AsyncResult() {
@@ -58,6 +58,7 @@ public class Staff extends AppCompatActivity {
                 intent.putExtra("espacio", proyecto.getEspacio());
                 intent.putExtra("proyecto", proyecto.getProyecto());
                 intent.putExtra("incubadora", proyecto.getIncubadora());
+                intent.putExtra("username", nombreUsuario.getText());
                 startActivity(intent);
             }
         };

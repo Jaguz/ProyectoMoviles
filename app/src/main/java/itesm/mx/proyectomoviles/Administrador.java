@@ -48,7 +48,6 @@ public class Administrador extends AppCompatActivity {
         espSpin = (Spinner) findViewById(R.id.spinEsp);
         proySpin = (Spinner) findViewById(R.id.spinProy);
 
-
         final Bundle datos = getIntent().getExtras();
         nameTV.setText(datos.getString("username"));
 

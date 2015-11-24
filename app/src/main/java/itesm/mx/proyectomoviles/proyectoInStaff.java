@@ -18,6 +18,7 @@ public class proyectoInStaff extends AppCompatActivity {
         setContentView(R.layout.activity_proyecto_in_staff);
         final Bundle datos = getIntent().getExtras();
 
+        final TextView nombreUsuario = (TextView) findViewById(R.id.nombreTV);
         final Button monitoreoButton = (Button) findViewById(R.id.monitoreoBT);
         final Button asistenciaButton = (Button) findViewById(R.id.asistenciaBT);
         final TextView nombre = (TextView) findViewById(R.id.nameTV);
@@ -27,6 +28,7 @@ public class proyectoInStaff extends AppCompatActivity {
         nombre.setText(datos.getString("proyecto"));
         lugar.setText(datos.getString("espacio"));
         incubadora.setText(datos.getString("incubadora"));
+        nombreUsuario.setText(datos.getString("username"));
 
         View.OnClickListener encuesta = new View.OnClickListener(){
 
@@ -36,7 +38,8 @@ public class proyectoInStaff extends AppCompatActivity {
                 intent.putExtra("proyecto", datos.getString("proyecto"));
                 intent.putExtra("espacio", datos.getString("espacio"));
                 intent.putExtra("incubadora", datos.getString("incubadora"));
-                startActivityForResult(intent,1);
+                intent.putExtra("username", nombreUsuario.getText());
+                startActivityForResult(intent, 1);
             }
         };
 
@@ -48,6 +51,7 @@ public class proyectoInStaff extends AppCompatActivity {
                 intent.putExtra("proyecto", datos.getString("proyecto"));
                 intent.putExtra("espacio", datos.getString("espacio"));
                 intent.putExtra("incubadora", datos.getString("incubadora"));
+                intent.putExtra("username", nombreUsuario.getText());
                 startActivityForResult(intent,1);
             }
         };
