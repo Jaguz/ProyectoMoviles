@@ -50,6 +50,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asistencia_staff);
 
+
         alumnosLV = (ListView) findViewById(R.id.listaAlumnos);
         Button guardarBtn = (Button) findViewById(R.id.guardarBtn);
         context = this;
@@ -65,8 +66,11 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
         }).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
 
         final Bundle datos = getIntent().getExtras();
+
         final TextView nombre = (TextView) findViewById(R.id.nameTV);
         nombre.setText(datos.getString("proyecto"));
+        final TextView nombreUsuario = (TextView) findViewById(R.id.nombreTV);
+        nombreUsuario.setText(datos.getString("username"));
 
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         new DownloadWebpageTask(new AsyncResult() {

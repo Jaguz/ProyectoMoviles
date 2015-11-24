@@ -13,9 +13,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nombre"
         android:id="@+id/nameTV"
+        android:textColor="#FFFFFFFF"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:textColor="#FFFFFFFF" />
+        android:layout_marginTop="42dp" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -37,7 +38,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
+        android:layout_below="@+id/nameTV"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="44dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Bienvenido(a)"
+        android:id="@+id/textView14"
         android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/listaAlumnos" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/nombreTV"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/guardarBtn"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>
