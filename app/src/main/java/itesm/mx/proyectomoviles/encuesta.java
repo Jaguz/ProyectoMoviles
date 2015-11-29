@@ -1,33 +1,43 @@
 package itesm.mx.proyectomoviles;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class encuesta extends AppCompatActivity {
     private static final String LOG_TAG = "";
+    ArrayAdapter<String> spin_adapter;
+    Context context;
+    List<String> fechas = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encuesta);
-
-
+        context= this;
+        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         final TextView respuesta1 = (TextView) findViewById(R.id.respuesta1);
         final TextView respuesta2 = (TextView) findViewById(R.id.respuesta2);
         final TextView respuesta3 = (TextView) findViewById(R.id.respuesta3);
@@ -59,6 +69,7 @@ public class encuesta extends AppCompatActivity {
                 String proyecto = datos.getString("proyecto");
                 String incubadora = datos.getString("incubadora");
                 String espacio = datos.getString("espacio");
+                String fecha = spinner.getSelectedItem().toString();
 
                 String urlParameters = "";
                 boolean res = true;
@@ -77,7 +88,7 @@ public class encuesta extends AppCompatActivity {
                             "entry_1186180893=" + URLEncoder.encode(incubadora, "UTF-8") + "&" +
                             "entry_1140484594=" + URLEncoder.encode(espacio, "UTF-8") + "&" +
                             "entry_1863821886=" + URLEncoder.encode(proyecto, "UTF-8") + "& " +
-                            "entry_173526216=" + URLEncoder.encode("aqui va la fecha", "UTF-8");
+                            "entry_173526216=" + URLEncoder.encode(fecha, "UTF-8");
                     new PostTask(new AsyncResult() {
                         @Override
                         public void onResult(JSONObject object) {
@@ -93,6 +104,30 @@ public class encuesta extends AppCompatActivity {
         };
 
         terminarButton.setOnClickListener(terminar);
+        new DownloadWebpageTask(new AsyncResult() {
+            @Override
+            public void onResult(JSONObject object) {
+                try {
+                    final Bundle datos = getIntent().getExtras();
+                    JSONArray rows = object.getJSONArray("rows");
+
+                    for (int r = 0; r < rows.length(); ++r) {
+                        JSONObject row = rows.getJSONObject(r);
+                        JSONArray columns = row.getJSONArray("c");
+                        String fecha = columns.getJSONObject(1).getString("v");
+                        fechas.add(fecha);
+                    }
+                    spin_adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, fechas);
+                    spin_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(spin_adapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
     }
 
     @Override
