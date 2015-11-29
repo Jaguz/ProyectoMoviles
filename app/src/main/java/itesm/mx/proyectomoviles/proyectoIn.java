@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 public class proyectoIn extends AppCompatActivity {
 
     private static final String LOG_TAG = "";
@@ -47,6 +49,12 @@ public class proyectoIn extends AppCompatActivity {
         asistenciaButton.setOnClickListener(asistencia);
         monitoreoButton.setOnClickListener(reporte);
 
+        new DownloadWebpageTask(new AsyncResult() {
+            @Override
+            public void onResult(JSONObject object) {
+
+            }
+        }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
 
     }
 

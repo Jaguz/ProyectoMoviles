@@ -37,6 +37,7 @@ public class Administrador extends AppCompatActivity {
     Spinner incSpin;
     Spinner espSpin;
     Spinner proySpin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
