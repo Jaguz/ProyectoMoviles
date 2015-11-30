@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < usuarioStaff.size(); i++) {
                     if (userET.getText().toString().equals(usuarioStaff.get(i)) &&
                             passET.getText().toString().equals(contrasenaStaff.get(i))) {
-                        Toast.makeText(context, "Prueba DEBUG", Toast.LENGTH_LONG).show();
                         intent2.putExtra("username", userET.getText().toString());
                         intent2.putExtra("password", passET.getText().toString());
                         startActivityForResult(intent2, 1);
