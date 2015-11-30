@@ -55,7 +55,21 @@
         </activity>
         <activity
             android:name=".RevisionAsistencia"
-            android:label="@string/title_activity_revision_asistencia" >
+            android:label="@string/title_activity_revision_asistencia"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".filtrosMonitoreo"
+            android:label="@string/title_activity_filtros_monitoreo" >
+        </activity>
+        <activity
+            android:name=".Cuanti"
+            android:label="@string/title_activity_cuanti"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".Cuali"
+            android:label="@string/title_activity_cuali" >
         </activity>
     </application>
 
