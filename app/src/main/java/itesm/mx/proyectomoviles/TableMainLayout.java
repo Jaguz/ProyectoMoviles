@@ -3,6 +3,7 @@ package itesm.mx.proyectomoviles;
 /**
  * Created by Javier on 11/16/2015.
  */
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +53,12 @@ public class TableMainLayout extends RelativeLayout {
     List<SampleObject> sampleObjects = new ArrayList<SampleObject>();
 
     int headerCellsWidth[];
-
+    String totalA[];
+    int subTotal[], fullTotal[];
+    int uselessMatrix[][][];
+    int totByProy[][];
+    int cantFechas[];
+    int maxTot;
     public TableMainLayout(Context contex, final String filterInc, final String filterEsp, final String filterProy) {
 
         super(contex);
@@ -61,6 +67,8 @@ public class TableMainLayout extends RelativeLayout {
 
         fechas.add("INCUBADORA   "); fechas.add("ESPACIO       "); fechas.add("PROYECTO    ");
         setBackgroundColor(Color.BLUE);
+        final SampleObject totalObj = new SampleObject("TOTAL", " ", " ", new ArrayList<String>());
+
         new DownloadWebpageTask(new AsyncResult() {
             @Override
             public void onResult(JSONObject object) {
@@ -78,6 +86,10 @@ public class TableMainLayout extends RelativeLayout {
                                     String fecha = columns.getJSONObject(1).getString("v");
                                     fechas.add(fecha);
                                 }
+                                fechas.add("PROMEDIO   ");
+                                totalA = new String[fechas.size()];
+                                subTotal = new int[fechas.size()];
+                                fullTotal = new int[fechas.size()];
 
                                 new DownloadWebpageTask(new AsyncResult() {
                                     @Override
@@ -104,6 +116,9 @@ public class TableMainLayout extends RelativeLayout {
                                             }
 
                                             String mat[][] = new String[proyectos.size()][fechas.size()];
+                                            uselessMatrix = new int[proyectos.size()][fechas.size()][2];
+                                            totByProy = new int[proyectos.size()][2];
+                                            cantFechas = new int[proyectos.size()];
                                             for(int j=0; j<proyectos.size(); j++) {
 
                                                 for (int i = 0; i < fechas.size(); i++) {
@@ -117,24 +132,59 @@ public class TableMainLayout extends RelativeLayout {
                                                 String inc = columns.getJSONObject(4).getString("v");
                                                 String proy = columns.getJSONObject(3).getString("v");
                                                 String fecha = columns.getJSONObject(2).getString("v");
-                                                String asist = Integer.toString((int)Double.parseDouble(columns.getJSONObject(1).getString("v")));
+                                                String asist = Integer.toString((int) Double.parseDouble(columns.getJSONObject(1).getString("v")));
+                                                String tot = Integer.toString((int)Double.parseDouble(columns.getJSONObject(6).getString("v")));
                                                 boolean flag = false;
                                                 for(int i=0; i<proyectos.size(); i++){
                                                     for(int j=0; j<fechas.size(); j++){
                                                         if(incubadoras.get(i).equals(inc)&&espacios.get(i).equals(esp)&&proyectos.get(i).equals(proy)&&fechas.get(j).equals(fecha)){
-                                                            mat[i][j] = asist;
+                                                            if(mat[i][j].equals(" ")) cantFechas[i]++;
+                                                            subTotal[j]-=uselessMatrix[i][j][0];
+                                                            fullTotal[j]-=uselessMatrix[i][j][1];
+                                                            totByProy[i][0]-=uselessMatrix[i][j][0];
+                                                            totByProy[i][1]-=uselessMatrix[i][j][1];
+                                                            mat[i][j] = asist + "/" + tot;
+                                                            totByProy[i][0] += Integer.parseInt(asist);
+                                                            totByProy[i][1]+=Integer.parseInt(tot);
+                                                            subTotal[j] += Integer.parseInt(asist);
+                                                            fullTotal[j] += Integer.parseInt(tot);
+                                                            uselessMatrix[i][j][0]=Integer.parseInt(asist);
+                                                            uselessMatrix[i][j][1]=Integer.parseInt(tot);
                                                         }
                                                     }
                                                 }
                                             }
                                             for(int j=0; j<proyectos.size(); j++){
+                                                maxTot+=cantFechas[j];
                                                 SampleObject so = new SampleObject(incubadoras.get(j), espacios.get(j), proyectos.get(j), new ArrayList<String>());
-                                                for(int i=3; i<fechas.size(); i++){
+                                                for(int i=3; i<fechas.size()-1; i++){
                                                     so.asistencias.add(mat[j][i]);
+                                                }
+                                                if(cantFechas[j]>0) {
+                                                    subTotal[fechas.size()-1]+=totByProy[j][0];
+                                                    fullTotal[fechas.size()-1]+=totByProy[j][1];
+                                                    so.asistencias.add(new DecimalFormat("0.00").format((double)totByProy[j][0]/(cantFechas[j]))+"/"+new DecimalFormat("0.00").format((double)totByProy[j][1]/(cantFechas[j])));
+                                                }
+                                                else {
+                                                    so.asistencias.add("-");
                                                 }
                                                 sampleObjects.add(so);
                                             }
                                             headerCellsWidth = new int[fechas.size()];
+
+                                            for(int i=3; i<fechas.size(); i++){
+                                                totalA[i]=Integer.toString(subTotal[i])+"/"+Integer.toString(fullTotal[i]);
+                                                if(fullTotal[i]==0)
+                                                    totalA[i]="-";
+                                                if(i==fechas.size()-1) {
+                                                    if(maxTot>0) {
+                                                        totalA[i] = new DecimalFormat("0.00").format((double) subTotal[i] / maxTot) + "/" + new DecimalFormat("0.00").format((double) fullTotal[i] / maxTot);
+                                                    }
+                                                    else totalA[i] = "-";
+                                                }
+                                                totalObj.asistencias.add(totalA[i]);
+                                            }
+                                            sampleObjects.add(totalObj);
 
                                             initComponents();
                                             setComponentsId();

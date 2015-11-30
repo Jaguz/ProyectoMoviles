@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,35 +24,43 @@
         </activity>
         <activity
             android:name=".Administrador"
-            android:label="@string/title_activity_administrador" >
+            android:label="@string/title_activity_administrador"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".proyectoIn"
-            android:label="@string/title_activity_proyecto_in" >
+            android:label="@string/title_activity_proyecto_in"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Monitoreo"
-            android:label="@string/title_activity_monitoreo" >
+            android:label="@string/title_activity_monitoreo"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Issues"
-            android:label="@string/title_activity_issues" >
+            android:label="@string/title_activity_issues"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Staff"
-            android:label="@string/title_activity_staff" >
+            android:label="@string/title_activity_staff"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".proyectoInStaff"
-            android:label="@string/title_activity_proyecto_in_staff" >
+            android:label="@string/title_activity_proyecto_in_staff"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".asistenciaStaff"
-            android:label="@string/title_activity_asistencia_staff" >
+            android:label="@string/title_activity_asistencia_staff"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".encuesta"
-            android:label="@string/title_activity_encuesta" >
+            android:label="@string/title_activity_encuesta"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".RevisionAsistencia"
@@ -60,7 +69,8 @@
         </activity>
         <activity
             android:name=".filtrosMonitoreo"
-            android:label="@string/title_activity_filtros_monitoreo" >
+            android:label="@string/title_activity_filtros_monitoreo"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Cuanti"
@@ -69,7 +79,8 @@
         </activity>
         <activity
             android:name=".Cuali"
-            android:label="@string/title_activity_cuali" >
+            android:label="@string/title_activity_cuali"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

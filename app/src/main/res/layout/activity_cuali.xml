@@ -6,7 +6,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="itesm.mx.proyectomoviles.Cuali"
     android:textAlignment="center"
-    android:background="#2E39B1">
+    android:background="#0039a6">
 
     <TextView
         android:layout_width="110dp"
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Propuesta"
+        android:text="Seguridad"
         android:id="@+id/textView18"
         android:textColor="#ffffff"
         android:textSize="16dp"
@@ -98,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="¿Qué propones para mejorar la implementación del proyecto?"
+        android:text="¿Hubo algún accidente o situación de riesgo con beneficiarios o alumnos Tec? Si la respuesta es afirmativa, describe la situación y las acciones llevadas a cabo para resolverla."
         android:id="@+id/textView20"
         android:textColor="#e8e8e8"
         android:layout_alignParentStart="true"
@@ -110,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Propuesta"
+        android:text="Comentarios"
         android:id="@+id/textView19"
         android:textColor="#ffffff"
         android:textSize="16dp"
@@ -122,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="¿Qué propones para mejorar la implementación del proyecto?"
+        android:text="¿Qué comentario, retroalimentación o aclaración te gustaría hacerle llegar al responsable del proyecto?"
         android:id="@+id/textView21"
         android:textColor="#e8e8e8"
         android:layout_alignParentStart="true"
@@ -138,7 +138,7 @@
         android:id="@+id/ans1"
         android:layout_below="@+id/textView17"
         android:layout_alignParentStart="true"
-        android:textColor="#ffffff"
+        android:textColor="#010101"
         android:layout_marginLeft="20dp" />
 
     <TextView
@@ -147,7 +147,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Respuesta"
         android:id="@+id/ans2"
-        android:textColor="#ffffff"
+        android:textColor="#010101"
         android:layout_below="@+id/textView20"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="20dp" />
@@ -158,7 +158,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Respuesta"
         android:id="@+id/ans3"
-        android:textColor="#ffffff"
+        android:textColor="#010101"
         android:layout_below="@+id/textView21"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="20dp" />
