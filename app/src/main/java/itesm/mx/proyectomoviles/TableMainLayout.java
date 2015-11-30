@@ -59,6 +59,7 @@ public class TableMainLayout extends RelativeLayout {
     int totByProy[][];
     int cantFechas[];
     int maxTot;
+    double a, b;
     public TableMainLayout(Context contex, final String filterInc, final String filterEsp, final String filterProy) {
 
         super(contex);
@@ -86,7 +87,7 @@ public class TableMainLayout extends RelativeLayout {
                                     String fecha = columns.getJSONObject(1).getString("v");
                                     fechas.add(fecha);
                                 }
-                                fechas.add("PROMEDIO   ");
+                                fechas.add("PROMEDIO      ");
                                 totalA = new String[fechas.size()];
                                 subTotal = new int[fechas.size()];
                                 fullTotal = new int[fechas.size()];
@@ -161,7 +162,8 @@ public class TableMainLayout extends RelativeLayout {
                                                     so.asistencias.add(mat[j][i]);
                                                 }
                                                 if(cantFechas[j]>0) {
-                                                    subTotal[fechas.size()-1]+=totByProy[j][0];
+                                                    a+=(double)totByProy[j][0]/(cantFechas[j]);
+                                                    b+=(double)totByProy[j][1]/(cantFechas[j]);
                                                     fullTotal[fechas.size()-1]+=totByProy[j][1];
                                                     so.asistencias.add(new DecimalFormat("0.00").format((double)totByProy[j][0]/(cantFechas[j]))+"/"+new DecimalFormat("0.00").format((double)totByProy[j][1]/(cantFechas[j])));
                                                 }
@@ -178,7 +180,7 @@ public class TableMainLayout extends RelativeLayout {
                                                     totalA[i]="-";
                                                 if(i==fechas.size()-1) {
                                                     if(maxTot>0) {
-                                                        totalA[i] = new DecimalFormat("0.00").format((double) subTotal[i] / maxTot) + "/" + new DecimalFormat("0.00").format((double) fullTotal[i] / maxTot);
+                                                        totalA[i] = new DecimalFormat("0.00").format(a)+"/"+new DecimalFormat("0.00").format(b);
                                                     }
                                                     else totalA[i] = "-";
                                                 }
