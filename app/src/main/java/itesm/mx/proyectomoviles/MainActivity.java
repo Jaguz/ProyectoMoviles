@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("password", passET.getText().toString());
                         startActivityForResult(intent, 1);
                     }
+
                 }
                 for (int i = 0; i < usuarioStaff.size(); i++) {
                     if (userET.getText().toString().equals(usuarioStaff.get(i)) &&
@@ -61,10 +62,11 @@ public class MainActivity extends AppCompatActivity {
                         intent2.putExtra("username", userET.getText().toString());
                         intent2.putExtra("password", passET.getText().toString());
                         startActivityForResult(intent2, 1);
-
                     }
                 }
+                
             }
+
         };
 
         new DownloadWebpageTask(new AsyncResult() {
@@ -112,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
             for (int r = 0; r < rows.length(); ++r) {
                 JSONObject row = rows.getJSONObject(r);
                 JSONArray columns = row.getJSONArray("c");
-                Toast.makeText(context, "Prueba DEBUG", Toast.LENGTH_LONG).show();
                 String usu = columns.getJSONObject(1).getString("v");
                 String pass = columns.getJSONObject(2).getString("v");
                 usuarioStaff.add(usu);
