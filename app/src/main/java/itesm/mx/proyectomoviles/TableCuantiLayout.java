@@ -3,6 +3,7 @@ package itesm.mx.proyectomoviles;
 /**
  * Created by Javier on 11/16/2015.
  */
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +54,11 @@ public class TableCuantiLayout extends RelativeLayout {
 
     int headerCellsWidth[];
 
+    String totalA[];
+    int subTotal[], fullTotal[];
+    int uselessMatrix[][][];
+    int totByProy[][];
+
     public TableCuantiLayout(Context contex, final String filterInc, final String filterEsp, final String filterProy) {
 
         super(contex);
@@ -61,6 +67,7 @@ public class TableCuantiLayout extends RelativeLayout {
 
         fechas.add("INCUBADORA   "); fechas.add("ESPACIO       "); fechas.add("PROYECTO    ");
         setBackgroundColor(Color.BLUE);
+        final SampleObject totalObj = new SampleObject("PROMEDIO ", " ", " ", new ArrayList<String>());
         new DownloadWebpageTask(new AsyncResult() {
             @Override
             public void onResult(JSONObject object) {
@@ -78,6 +85,10 @@ public class TableCuantiLayout extends RelativeLayout {
                                     String fecha = columns.getJSONObject(1).getString("v");
                                     fechas.add(fecha);
                                 }
+                                fechas.add("PROMEDIO");
+                                totalA = new String[fechas.size()];
+                                subTotal = new int[fechas.size()];
+                                fullTotal = new int[fechas.size()];
 
                                 new DownloadWebpageTask(new AsyncResult() {
                                     @Override
@@ -104,6 +115,8 @@ public class TableCuantiLayout extends RelativeLayout {
                                             }
 
                                             String mat[][] = new String[proyectos.size()][fechas.size()];
+                                            uselessMatrix = new int[proyectos.size()][fechas.size()][2];
+                                            totByProy = new int[proyectos.size()][2];
                                             for (int j = 0; j < proyectos.size(); j++) {
 
                                                 for (int i = 0; i < fechas.size(); i++) {
@@ -127,18 +140,44 @@ public class TableCuantiLayout extends RelativeLayout {
                                                 for (int i = 0; i < proyectos.size(); i++) {
                                                     for (int j = 0; j < fechas.size(); j++) {
                                                         if (incubadoras.get(i).equals(inc) && espacios.get(i).equals(esp) && proyectos.get(i).equals(proy) && fechas.get(j).equals(fecha)) {
+                                                            totByProy[i][0]-=uselessMatrix[i][j][0];
+                                                            totByProy[i][1]-=uselessMatrix[i][j][1];
+                                                            subTotal[j]-=uselessMatrix[i][j][0];
+                                                            fullTotal[j]-=uselessMatrix[i][j][1];
                                                             mat[i][j] = asist;
+                                                            totByProy[i][0] += Integer.parseInt(asist);
+                                                            totByProy[i][1]+=1;
+                                                            subTotal[j] += Integer.parseInt(asist);
+                                                            fullTotal[j] += 1;
+                                                            uselessMatrix[i][j][0]=Integer.parseInt(asist);
+                                                            uselessMatrix[i][j][1]=1;
                                                         }
                                                     }
                                                 }
                                             }
                                             for (int j = 0; j < proyectos.size(); j++) {
                                                 SampleObject so = new SampleObject(incubadoras.get(j), espacios.get(j), proyectos.get(j), new ArrayList<String>());
-                                                for (int i = 3; i < fechas.size(); i++) {
+                                                for (int i = 3; i < fechas.size()-1; i++) {
                                                     so.asistencias.add(mat[j][i]);
+                                                }
+                                                if(totByProy[j][1]>0) {
+                                                    subTotal[fechas.size()-1]+=totByProy[j][0];
+                                                    fullTotal[fechas.size()-1]+=totByProy[j][1];
+                                                    so.asistencias.add(new DecimalFormat("0.00").format((double) totByProy[j][0] / totByProy[j][1]));
+                                                }
+                                                else {
+                                                    so.asistencias.add("-");
                                                 }
                                                 sampleObjects.add(so);
                                             }
+                                            for(int i=3; i<fechas.size(); i++){
+                                                if(fullTotal[i]>0)
+                                                    totalA[i]=new DecimalFormat("0.00").format((double)subTotal[i]/fullTotal[i]);
+                                                else
+                                                    totalA[i]="-";
+                                                totalObj.asistencias.add(totalA[i]);
+                                            }
+                                            sampleObjects.add(totalObj);
                                             headerCellsWidth = new int[fechas.size()];
 
                                             initComponents();
