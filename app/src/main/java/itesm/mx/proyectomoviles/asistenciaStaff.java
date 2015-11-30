@@ -108,14 +108,15 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                 String str3 = datos.getString("proyecto");
                 String str4 = datos.getString("incubadora");
                 String str5 = datos.getString("espacio");
+                String str6 = Integer.toString(alumnos.size());
                 String urlParameters="";
-                boolean res= true;
                 try {
                     urlParameters = "entry_1579137901=" + URLEncoder.encode(str1) + "&" +
                             "entry_1621524700=" + URLEncoder.encode(str2, "UTF-8") + "&" +
                             "entry_995735811=" + URLEncoder.encode(str3, "UTF-8") + "&" +
                             "entry_1657960210=" + URLEncoder.encode(str4, "UTF-8") + "&" +
-                            "entry_1376801195=" + URLEncoder.encode(str5, "UTF-8");
+                            "entry_1376801195=" + URLEncoder.encode(str5, "UTF-8") + "&" +
+                            "entry_181768415=" + URLEncoder.encode(str6, "UTF-8");
                     new PostTask(new AsyncResult() {
                         @Override
                         public void onResult(JSONObject object) {
