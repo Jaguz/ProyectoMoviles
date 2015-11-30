@@ -132,6 +132,34 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                System.out.println(urlParameters);
                 Toast.makeText(asistenciaStaff.this, "Se han registrado " +Integer.toString(adapter.counter)+" asistencias.", Toast.LENGTH_SHORT).show();
 
+                for(int i=0; i<list.size(); i++){
+                    CheckBox checkbox = (CheckBox) alumnosLV.getChildAt(i).findViewById(R.id.checkBox1);
+                    str1 = list.get(i).getName();
+                    str2 = datos.getString("proyecto");
+                    str3 = datos.getString("incubadora");
+                    str4 = datos.getString("espacio");
+                    str5 = spinner.getSelectedItem().toString();
+                    str6 = checkbox.isChecked()?"1":"0";
+                    urlParameters="";
+                    try {
+                        urlParameters = "entry_1736803261=" + URLEncoder.encode(str1, "UTF-8") + "&" +
+                                "entry_1389547154=" + URLEncoder.encode(str2, "UTF-8") + "&" +
+                                "entry_902302539=" + URLEncoder.encode(str3, "UTF-8") + "&" +
+                                "entry_324048957=" + URLEncoder.encode(str4, "UTF-8") + "&" +
+                                "entry_1743044751=" + URLEncoder.encode(str5, "UTF-8") + "&" +
+                                "entry_1372177941=" + URLEncoder.encode(str6, "UTF-8");
+                        new PostInd(new AsyncResult() {
+                            @Override
+                            public void onResult(JSONObject object) {
+
+                            }
+                        }).execute(urlParameters);
+                    }
+                    catch (UnsupportedEncodingException ex) {
+                        Toast.makeText(asistenciaStaff.this,"D=", Toast.LENGTH_LONG).show();
+                    }
+                }
+
                 finish();
             }
         };
@@ -277,10 +305,56 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
             return result;
         }
 
+
+
         // onPostExecute displays the results of the AsyncTask.
         protected void onPostExecute(Boolean result){
             //Print Success or failure message accordingly
-            Toast.makeText(context, result ? "Asistencias grabadas correctamente." : "Hubo un error al grabar las asistencias.", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public class PostInd extends AsyncTask<String, Void, Boolean> {
+        AsyncResult callback;
+
+        public PostInd(AsyncResult callback) {
+            this.callback = callback;
+        }
+
+        @Override
+        protected Boolean doInBackground(String... param) {
+
+            HttpsURLConnection connection = null;
+            Boolean result = true;
+
+            try {
+                URL myUrl = new URL("https://docs.google.com/forms/d/1X_Dh77rhmysLXf8NwbJI0AVCS8WfyhzmXAF2B1GH2HY/formResponse");
+                connection = (HttpsURLConnection) myUrl.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("User-Agent", "ProyectoMoviles/1.0");
+                connection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+
+                //connection.setRequestProperty("Content-Length", "" +
+                //Integer.toString(urlParameters.getBytes().length));
+                //connection.setRequestProperty("Content-Language", "en-US");
+
+                //connection.setUseCaches (false);
+                connection.setDoOutput(true);
+
+                //Send request
+                DataOutputStream wr = new DataOutputStream(
+                        connection.getOutputStream());
+                wr.writeBytes(param[0]);
+                wr.flush();
+                wr.close();
+                System.out.println("Response Code : " + connection.getResponseCode());
+            } catch (Exception e) {
+                result = false;
+                e.printStackTrace();
+            } finally {
+                if (null != connection)
+                    connection.disconnect();
+            }
+            return result;
         }
     }
 }
