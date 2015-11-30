@@ -25,42 +25,42 @@
         <activity
             android:name=".Administrador"
             android:label="@string/title_activity_administrador"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".proyectoIn"
             android:label="@string/title_activity_proyecto_in"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Monitoreo"
             android:label="@string/title_activity_monitoreo"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Issues"
             android:label="@string/title_activity_issues"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Staff"
             android:label="@string/title_activity_staff"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".proyectoInStaff"
             android:label="@string/title_activity_proyecto_in_staff"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".asistenciaStaff"
             android:label="@string/title_activity_asistencia_staff"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".encuesta"
             android:label="@string/title_activity_encuesta"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".RevisionAsistencia"
@@ -70,17 +70,21 @@
         <activity
             android:name=".filtrosMonitoreo"
             android:label="@string/title_activity_filtros_monitoreo"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Cuanti"
             android:label="@string/title_activity_cuanti"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".Cuali"
             android:label="@string/title_activity_cuali"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".AgregarAlumno"
+            android:label="@string/title_activity_agregar_alumno" >
         </activity>
     </application>
 

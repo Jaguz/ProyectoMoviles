@@ -77,7 +77,7 @@ public class encuesta extends AppCompatActivity {
                 boolean res = true;
 
                 try {
-                    urlParameters = "entry_1411199782=" + URLEncoder.encode(r1) + "&" +
+                    urlParameters = "entry_1411199782=" + URLEncoder.encode(r1, "UTF-8") + "&" +
                             "entry_1090701511=" + URLEncoder.encode(r2, "UTF-8") + "&" +
                             "entry_1621503727=" + URLEncoder.encode(r3, "UTF-8") + "&" +
                             "entry_754173517=" + URLEncoder.encode(r4, "UTF-8") + "&" +
