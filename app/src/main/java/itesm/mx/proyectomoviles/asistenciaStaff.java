@@ -2,6 +2,7 @@ package itesm.mx.proyectomoviles;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -53,6 +54,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
 
         alumnosLV = (ListView) findViewById(R.id.listaAlumnos);
         Button guardarBtn = (Button) findViewById(R.id.guardarBtn);
+        Button agregarBtn =(Button) findViewById(R.id.agregarBtn);
         context = this;
 
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -109,10 +111,10 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                 String str3 = datos.getString("proyecto");
                 String str4 = datos.getString("incubadora");
                 String str5 = datos.getString("espacio");
-                String str6 = Integer.toString(alumnos.size());
+                String str6 = Integer.toString(list.size());
                 String urlParameters="";
                 try {
-                    urlParameters = "entry_1579137901=" + URLEncoder.encode(str1) + "&" +
+                    urlParameters = "entry_1579137901=" + URLEncoder.encode(str1, "UTF-8") + "&" +
                             "entry_1621524700=" + URLEncoder.encode(str2, "UTF-8") + "&" +
                             "entry_995735811=" + URLEncoder.encode(str3, "UTF-8") + "&" +
                             "entry_1657960210=" + URLEncoder.encode(str4, "UTF-8") + "&" +
@@ -129,19 +131,33 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                     Toast.makeText(asistenciaStaff.this,"D=", Toast.LENGTH_LONG).show();
                 }
                System.out.println(urlParameters);
-                Toast.makeText(asistenciaStaff.this, "Se han grabado " +Integer.toString(adapter.counter)+" asistencias.", Toast.LENGTH_LONG).show();
+                Toast.makeText(asistenciaStaff.this, "Se han registrado " +Integer.toString(adapter.counter)+" asistencias.", Toast.LENGTH_SHORT).show();
 
                 finish();
             }
         };
         guardarBtn.setOnClickListener(guardar);
+
+        View.OnClickListener agregar = new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(asistenciaStaff.this, AgregarAlumno.class);
+                intent.putExtra("proyecto", datos.getString("proyecto"));
+                intent.putExtra("espacio", datos.getString("espacio"));
+                intent.putExtra("incubadora", datos.getString("incubadora"));
+                intent.putExtra("username", nombreUsuario.getText());
+                startActivityForResult(intent, 1);
+            }
+        };
+        agregarBtn.setOnClickListener(agregar);
     }
 
     private void processJson(JSONObject object) {
         try {
             final Bundle datos = getIntent().getExtras();
             JSONArray rows = object.getJSONArray("rows");
-
+            list.clear();
             for (int r = 0; r < rows.length(); ++r) {
                 JSONObject row = rows.getJSONObject(r);
                 JSONArray columns = row.getJSONArray("c");
@@ -206,6 +222,17 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
         return super.onOptionsItemSelected(item);
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        new DownloadWebpageTask(new AsyncResult() {
+            @Override
+            public void onResult(JSONObject object) {
+                processJson(object);
+            }
+        }).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
+    }
+
+
+
     public class PostTask extends AsyncTask<String, Void, Boolean> {
         AsyncResult callback;
 
@@ -254,7 +281,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
         // onPostExecute displays the results of the AsyncTask.
         protected void onPostExecute(Boolean result){
             //Print Success or failure message accordingly
-            Toast.makeText(context, result ? "Message successfully sent!" : "There was some error in sending message. Please try again after some time.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, result ? "Asistencias grabadas correctamente." : "Hubo un error al grabar las asistencias.", Toast.LENGTH_SHORT).show();
         }
     }
 }
