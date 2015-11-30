@@ -50,8 +50,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asistencia_staff);
-
-
+        Toast.makeText(this, "Cargando", Toast.LENGTH_SHORT).show();
         alumnosLV = (ListView) findViewById(R.id.listaAlumnos);
         Button guardarBtn = (Button) findViewById(R.id.guardarBtn);
         Button agregarBtn =(Button) findViewById(R.id.agregarBtn);
@@ -100,7 +99,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
             }
         }).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
 
-
+        Toast.makeText(this, "Finalizado", Toast.LENGTH_SHORT).show();
 
         View.OnClickListener guardar = new View.OnClickListener() {
 

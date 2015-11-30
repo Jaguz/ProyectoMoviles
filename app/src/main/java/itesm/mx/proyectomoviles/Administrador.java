@@ -1,5 +1,6 @@
 package itesm.mx.proyectomoviles;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -130,6 +131,7 @@ public class Administrador extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
