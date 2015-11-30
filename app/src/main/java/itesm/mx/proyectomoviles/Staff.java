@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,15 +42,14 @@ public class Staff extends AppCompatActivity {
         final TextView nombreUsuario = (TextView) findViewById(R.id.nombreTV);
         final Bundle datos = getIntent().getExtras();
         nombreUsuario.setText(datos.getString("username"));
-
-
+        Toast.makeText(this, "Cargando", Toast.LENGTH_SHORT).show();
         new DownloadWebpageTask(new AsyncResult() {
             @Override
             public void onResult(JSONObject object) {
                 processJson(object);
             }
         }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
-
+        Toast.makeText(this, "Finalizado", Toast.LENGTH_SHORT).show();
         final AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
