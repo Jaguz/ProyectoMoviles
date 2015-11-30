@@ -16,4 +16,5 @@
     <string name="title_activity_filtros_monitoreo">filtrosMonitoreo</string>
     <string name="title_activity_cuanti">Cuanti</string>
     <string name="title_activity_cuali">Cuali</string>
+    <string name="title_activity_agregar_alumno">AgregarAlumno</string>
 </resources>

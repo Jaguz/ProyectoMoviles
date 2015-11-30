@@ -38,13 +38,13 @@
         android:id="@+id/asistenciaBT"
         android:layout_marginTop="106dp"
         android:layout_below="@+id/nameTV"
-        android:layout_alignStart="@+id/monitoreoBT" />
+        android:layout_alignStart="@+id/agregarBT" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Monitoreo"
-        android:id="@+id/monitoreoBT"
+        android:id="@+id/agregarBT"
         android:layout_marginTop="89dp"
         android:layout_below="@+id/asistenciaBT"
         android:layout_centerHorizontal="true" />

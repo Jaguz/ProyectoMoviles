@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Guardar"
         android:id="@+id/guardarBtn"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@+id/agregarBtn"
         android:layout_centerHorizontal="true" />
 
     <Spinner
@@ -63,5 +63,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/guardarBtn"
         android:textColor="#ffffff" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Agregar Alumno"
+        android:id="@+id/agregarBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

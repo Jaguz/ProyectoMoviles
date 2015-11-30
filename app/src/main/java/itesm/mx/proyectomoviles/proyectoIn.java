@@ -23,7 +23,7 @@ public class proyectoIn extends AppCompatActivity {
         final Bundle datos = getIntent().getExtras();
         final TextView nombre = (TextView) findViewById(R.id.nameTV);
         final Button asistenciaButton = (Button) findViewById(R.id.asistenciaBT);
-        final Button monitoreoButton = (Button) findViewById(R.id.monitoreoBT);
+        final Button monitoreoButton = (Button) findViewById(R.id.agregarBT);
 
         nombre.setText(datos.getString("username"));
 
