@@ -14,9 +14,9 @@
         android:text="Nombre"
         android:id="@+id/nameTV"
         android:textColor="#FFFFFFFF"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/textView14"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="42dp" />
+        android:layout_marginTop="15dp" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -24,7 +24,8 @@
         android:id="@+id/listaAlumnos"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/guardarBtn"
-        android:layout_below="@+id/spinner" />
+        android:layout_below="@+id/spinner"
+        android:layout_marginTop="15dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -40,7 +41,7 @@
         android:id="@+id/spinner"
         android:layout_below="@+id/nameTV"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="44dp" />
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:layout_width="wrap_content"

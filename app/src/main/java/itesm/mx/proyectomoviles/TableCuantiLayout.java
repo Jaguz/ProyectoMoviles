@@ -28,7 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class TableMainLayout extends RelativeLayout {
+public class TableCuantiLayout extends RelativeLayout {
 
     public final String TAG = "TableMainLayout.java";
 
@@ -53,7 +53,7 @@ public class TableMainLayout extends RelativeLayout {
 
     int headerCellsWidth[];
 
-    public TableMainLayout(Context contex, final String filterInc, final String filterEsp, final String filterProy) {
+    public TableCuantiLayout(Context contex, final String filterInc, final String filterEsp, final String filterProy) {
 
         super(contex);
 
@@ -104,32 +104,37 @@ public class TableMainLayout extends RelativeLayout {
                                             }
 
                                             String mat[][] = new String[proyectos.size()][fechas.size()];
-                                            for(int j=0; j<proyectos.size(); j++) {
+                                            for (int j = 0; j < proyectos.size(); j++) {
 
                                                 for (int i = 0; i < fechas.size(); i++) {
-                                                    mat[j][i]=" ";
+                                                    mat[j][i] = " ";
                                                 }
                                             }
                                             for (int r = 0; r < rows.length(); ++r) {
                                                 JSONObject row = rows.getJSONObject(r);
                                                 JSONArray columns = row.getJSONArray("c");
-                                                String esp = columns.getJSONObject(5).getString("v");
-                                                String inc = columns.getJSONObject(4).getString("v");
-                                                String proy = columns.getJSONObject(3).getString("v");
-                                                String fecha = columns.getJSONObject(2).getString("v");
-                                                String asist = Integer.toString((int)Double.parseDouble(columns.getJSONObject(1).getString("v")));
+                                                String esp = columns.getJSONObject(12).getString("v");
+                                                String inc = columns.getJSONObject(11).getString("v");
+                                                String proy = columns.getJSONObject(13).getString("v");
+                                                String fecha = columns.getJSONObject(14).getString("v");
+                                                String asist = Integer.toString((int) (Double.parseDouble(columns.getJSONObject(1).getString("v"))
+                                                        + Double.parseDouble(columns.getJSONObject(2).getString("v"))
+                                                        + Double.parseDouble(columns.getJSONObject(3).getString("v"))
+                                                        + Double.parseDouble(columns.getJSONObject(4).getString("v"))
+                                                        + Double.parseDouble(columns.getJSONObject(5).getString("v"))
+                                                        + Double.parseDouble(columns.getJSONObject(9).getString("v"))));
                                                 boolean flag = false;
-                                                for(int i=0; i<proyectos.size(); i++){
-                                                    for(int j=0; j<fechas.size(); j++){
-                                                        if(incubadoras.get(i).equals(inc)&&espacios.get(i).equals(esp)&&proyectos.get(i).equals(proy)&&fechas.get(j).equals(fecha)){
+                                                for (int i = 0; i < proyectos.size(); i++) {
+                                                    for (int j = 0; j < fechas.size(); j++) {
+                                                        if (incubadoras.get(i).equals(inc) && espacios.get(i).equals(esp) && proyectos.get(i).equals(proy) && fechas.get(j).equals(fecha)) {
                                                             mat[i][j] = asist;
                                                         }
                                                     }
                                                 }
                                             }
-                                            for(int j=0; j<proyectos.size(); j++){
+                                            for (int j = 0; j < proyectos.size(); j++) {
                                                 SampleObject so = new SampleObject(incubadoras.get(j), espacios.get(j), proyectos.get(j), new ArrayList<String>());
-                                                for(int i=3; i<fechas.size(); i++){
+                                                for (int i = 3; i < fechas.size(); i++) {
                                                     so.asistencias.add(mat[j][i]);
                                                 }
                                                 sampleObjects.add(so);
@@ -180,9 +185,7 @@ public class TableMainLayout extends RelativeLayout {
                     e.printStackTrace();
                 }
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1ECcVX2RlkyILoUxpX5eVbtt8gfo7GgdyGAJKxhT8JVk");
-
-
+        }).execute("https://spreadsheets.google.com/tq?key=1fg-dApPcbjP6dfzCZJVPAL4xUGIlVDdslZol6ilb0Kc");
     }
 
     // initalized components

@@ -39,7 +39,7 @@ public class proyectoIn extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(proyectoIn.this, Issues.class);
+                Intent intent = new Intent(proyectoIn.this, filtrosMonitoreo.class);
                 intent.putExtra("username", datos.getString("username"));
                 startActivityForResult(intent,1);
             }

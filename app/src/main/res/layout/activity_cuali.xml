@@ -1,0 +1,165 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="itesm.mx.proyectomoviles.Cuali"
+    android:textAlignment="center"
+    android:background="#2E39B1">
+
+    <TextView
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Incubadora"
+        android:id="@+id/incuTV"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/espaTV"
+        android:textSize="14dp"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Espacio"
+        android:id="@+id/espaTV"
+        android:textSize="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Proyecto"
+        android:id="@+id/proyTV"
+        android:layout_marginLeft="15dp"
+        android:textSize="14dp"
+        android:layout_toRightOf="@+id/espaTV"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="right"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Fecha"
+        android:id="@+id/fechaTV"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/espaTV"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Propuesta"
+        android:id="@+id/textView16"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/fechaTV"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="¿Qué propones para mejorar la implementación del proyecto?"
+        android:id="@+id/textView17"
+        android:layout_below="@+id/textView16"
+        android:layout_alignParentStart="true"
+        android:textColor="#e8e8e8"
+        android:textSize="14dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Propuesta"
+        android:id="@+id/textView18"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:layout_below="@+id/ans1"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="¿Qué propones para mejorar la implementación del proyecto?"
+        android:id="@+id/textView20"
+        android:textColor="#e8e8e8"
+        android:layout_alignParentStart="true"
+        android:textSize="14dp"
+        android:layout_below="@+id/textView18"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Propuesta"
+        android:id="@+id/textView19"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:layout_below="@+id/ans2"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="¿Qué propones para mejorar la implementación del proyecto?"
+        android:id="@+id/textView21"
+        android:textColor="#e8e8e8"
+        android:layout_alignParentStart="true"
+        android:textSize="14dp"
+        android:layout_below="@+id/textView19"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Respuesta"
+        android:id="@+id/ans1"
+        android:layout_below="@+id/textView17"
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Respuesta"
+        android:id="@+id/ans2"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/textView20"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Respuesta"
+        android:id="@+id/ans3"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/textView21"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp" />
+</RelativeLayout>

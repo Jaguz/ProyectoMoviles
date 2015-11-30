@@ -1,16 +1,13 @@
 package itesm.mx.proyectomoviles;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-
-import android.os.Bundle;
-import android.app.Activity;
 import android.widget.Toast;
 
-public class RevisionAsistencia extends Activity {
+public class Cuanti extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +16,6 @@ public class RevisionAsistencia extends Activity {
         final String filterProy = datos.getString("proyecto");
         final String filterInc = datos.getString("incubadora");
         final String filterEsp = datos.getString("espacio");
-        setContentView(new TableMainLayout(this, filterInc, filterEsp, filterProy));
+        setContentView(new TableCuantiLayout(this, filterInc, filterEsp, filterProy));
     }
 }
