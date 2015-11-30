@@ -1,6 +1,7 @@
 package itesm.mx.proyectomoviles;
 
 import android.app.Activity;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +17,15 @@ public class Cuanti extends Activity {
         final String filterProy = datos.getString("proyecto");
         final String filterInc = datos.getString("incubadora");
         final String filterEsp = datos.getString("espacio");
+        Toast.makeText(this, "Cargando", Toast.LENGTH_SHORT).show();
         setContentView(new TableCuantiLayout(this, filterInc, filterEsp, filterProy));
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+            }
+        }, 200);
+        Toast.makeText(this, "Finalizado", Toast.LENGTH_SHORT).show();
     }
 }
