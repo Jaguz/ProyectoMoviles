@@ -34,6 +34,7 @@ public class Administrador extends AppCompatActivity {
     ArrayAdapter<String> espAdapter;
     ArrayAdapter<String> incAdapter;
     Button cargarBT;
+    Button alumnosBT;
     Context context;
     Spinner incSpin;
     Spinner espSpin;
@@ -46,6 +47,7 @@ public class Administrador extends AppCompatActivity {
         context = this;
         TextView nameTV = (TextView) findViewById(R.id.nameTV);
         cargarBT = (Button) findViewById(R.id.proyectosBT);
+        alumnosBT = (Button) findViewById(R.id.alumnosBtn);
         incSpin = (Spinner) findViewById(R.id.spinInc);
         espSpin = (Spinner) findViewById(R.id.spinEsp);
         proySpin = (Spinner) findViewById(R.id.spinProy);
@@ -76,11 +78,31 @@ public class Administrador extends AppCompatActivity {
             }
         };
 
+        final View.OnClickListener AsistenciaAlumnos = new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String incubadora = " ";
+                String espacio = " ";
+                String proyecto = " ";
+                incubadora = incSpin.getSelectedItem().toString();
+                espacio = espSpin.getSelectedItem().toString();
+                proyecto = proySpin.getSelectedItem().toString();
+                Intent intent = new Intent (Administrador.this, RevisionAsistenciaTec.class);
+                intent.putExtra("username", datos.getString("username"));
+                intent.putExtra("incubadora", incubadora);
+                intent.putExtra("espacio", espacio);
+                intent.putExtra("proyecto", proyecto);
+                startActivityForResult(intent, 1);
+            }
+        };
+
         new DownloadWebpageTask(new AsyncResult() {
             @Override
             public void onResult(JSONObject object) {
                 processJson(object);
                 cargarBT.setOnClickListener(verAsistencia);
+                alumnosBT.setOnClickListener(AsistenciaAlumnos);
             }
         }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
 
