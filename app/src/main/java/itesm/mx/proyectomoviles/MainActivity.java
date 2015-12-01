@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     List<String> usuario = new ArrayList<String>();
     List<String> contrasena = new ArrayList<String>();
+    List<String> espacio = new ArrayList<String>();
     List<String> usuarioStaff = new ArrayList<String>();
     List<String> contrasenaStaff = new ArrayList<String>();
     Context context;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                             passET.getText().toString().equals(contrasenaStaff.get(i))) {
                         intent2.putExtra("username", userET.getText().toString());
                         intent2.putExtra("password", passET.getText().toString());
+                        intent2.putExtra("espUser", espacio.get(i));
                         startActivityForResult(intent2, 1);
 
                     }
@@ -114,8 +116,11 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray columns = row.getJSONArray("c");
                 String usu = columns.getJSONObject(1).getString("v");
                 String pass = columns.getJSONObject(2).getString("v");
+                String espa = columns.getJSONObject(3).getString("v");
                 usuarioStaff.add(usu);
                 contrasenaStaff.add(pass);
+                espacio.add(espa);
+
             }
 
 

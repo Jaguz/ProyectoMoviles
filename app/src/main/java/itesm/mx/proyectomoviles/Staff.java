@@ -30,6 +30,7 @@ public class Staff extends AppCompatActivity {
     ListView proyectoLV;
     Button cargarBT;
     ListViewAdapter adapter;
+    String espa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,7 @@ public class Staff extends AppCompatActivity {
 
         final TextView nombreUsuario = (TextView) findViewById(R.id.nombreTV);
         final Bundle datos = getIntent().getExtras();
+        espa = datos.getString("espUser");
         nombreUsuario.setText(datos.getString("username"));
         Toast.makeText(this, "Cargando", Toast.LENGTH_SHORT).show();
         new DownloadWebpageTask(new AsyncResult() {
@@ -78,7 +80,8 @@ public class Staff extends AppCompatActivity {
                 String lugar = columns.getJSONObject(2).getString("v");
                 String proyect = columns.getJSONObject(3).getString("v");
                 Proyecto proyecto = new Proyecto(nombre, lugar, proyect);
-                proyectos.add(proyecto);
+                if(lugar.equals(espa))
+                    proyectos.add(proyecto);
             }
 
             adapter = new ListViewAdapter(this, R.layout.row, proyectos);
