@@ -84,7 +84,23 @@
         </activity>
         <activity
             android:name=".AgregarAlumno"
-            android:label="@string/title_activity_agregar_alumno" >
+            android:label="@string/title_activity_agregar_alumno"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".asistenciaAlumnosTec"
+            android:label="@string/title_activity_asistencia_alumnos_tec"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".AgregarAlumnoTec"
+            android:label="@string/title_activity_agregar_alumno_tec"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".RevisionAsistenciaTec"
+            android:label="@string/title_activity_revision_asistencia_tec"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 

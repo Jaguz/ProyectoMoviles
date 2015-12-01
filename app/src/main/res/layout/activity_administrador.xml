@@ -33,11 +33,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver Asistencias"
+        android:text="Asistencias de Beneficiarios"
         android:id="@+id/proyectosBT"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/spinProy"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp" />
+        android:layout_marginTop="20dp" />
 
     <Spinner
         android:layout_width="fill_parent"
@@ -94,5 +94,14 @@
         android:layout_below="@+id/spinEsp"
         android:layout_alignParentStart="true"
         android:textColor="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Asistencias de Alumnos"
+        android:id="@+id/alumnosBtn"
+        android:layout_below="@+id/proyectosBT"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>

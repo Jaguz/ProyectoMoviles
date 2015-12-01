@@ -21,6 +21,7 @@ public class proyectoInStaff extends AppCompatActivity {
         final TextView nombreUsuario = (TextView) findViewById(R.id.nombreTV);
         final Button monitoreoButton = (Button) findViewById(R.id.monitoreoBT);
         final Button asistenciaButton = (Button) findViewById(R.id.asistenciaBT);
+        final Button alumnosBtn = (Button) findViewById(R.id.alumnosBtn);
         final TextView nombre = (TextView) findViewById(R.id.nameTV);
         final TextView lugar = (TextView) findViewById(R.id.espacioTV);
         final TextView incubadora = (TextView) findViewById(R.id.layoutID);
@@ -57,6 +58,20 @@ public class proyectoInStaff extends AppCompatActivity {
         };
         asistenciaButton.setOnClickListener(asistencia);
         monitoreoButton.setOnClickListener(encuesta);
+
+        View.OnClickListener alumnos = new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(proyectoInStaff.this, asistenciaAlumnosTec.class);
+                intent.putExtra("proyecto", datos.getString("proyecto"));
+                intent.putExtra("espacio", datos.getString("espacio"));
+                intent.putExtra("incubadora", datos.getString("incubadora"));
+                intent.putExtra("username", nombreUsuario.getText());
+                startActivityForResult(intent,1);
+            }
+        };
+        alumnosBtn.setOnClickListener(alumnos);
 
 
 
