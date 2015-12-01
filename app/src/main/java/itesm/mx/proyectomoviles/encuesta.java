@@ -100,7 +100,7 @@ public class encuesta extends AppCompatActivity {
                 } catch (UnsupportedEncodingException e) {
                     Toast.makeText(encuesta.this, "ño", Toast.LENGTH_LONG).show();
                 }
-
+                Toast.makeText(context, "Encuesta Enviada", Toast.LENGTH_LONG).show();
                 finish();
             }
         };

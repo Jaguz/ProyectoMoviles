@@ -22,7 +22,6 @@ public class RevisionAsistencia extends Activity {
         final String filterInc = datos.getString("incubadora");
         final String filterEsp = datos.getString("espacio");
         Toast.makeText(this, "Cargando", Toast.LENGTH_SHORT).show();
-
         setContentView(new TableMainLayout(this, filterInc, filterEsp, filterProy));
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("password", passET.getText().toString());
                         startActivityForResult(intent, 1);
                     }
+
                 }
                 for (int i = 0; i < usuarioStaff.size(); i++) {
                     if (userET.getText().toString().equals(usuarioStaff.get(i)) &&
@@ -63,10 +64,11 @@ public class MainActivity extends AppCompatActivity {
                         intent2.putExtra("password", passET.getText().toString());
                         intent2.putExtra("espUser", espacio.get(i));
                         startActivityForResult(intent2, 1);
-
                     }
                 }
+                
             }
+
         };
 
         new DownloadWebpageTask(new AsyncResult() {
