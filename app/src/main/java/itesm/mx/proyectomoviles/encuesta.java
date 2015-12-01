@@ -89,7 +89,7 @@ public class encuesta extends AppCompatActivity {
                             "entry_145679237=" + URLEncoder.encode(r10, "UTF-8") + "&" +
                             "entry_1186180893=" + URLEncoder.encode(incubadora, "UTF-8") + "&" +
                             "entry_1140484594=" + URLEncoder.encode(espacio, "UTF-8") + "&" +
-                            "entry_1863821886=" + URLEncoder.encode(proyecto, "UTF-8") + "& " +
+                            "entry_1863821886=" + URLEncoder.encode(proyecto, "UTF-8") + "&" +
                             "entry_173526216=" + URLEncoder.encode(fecha, "UTF-8");
                     new PostTask(new AsyncResult() {
                         @Override
