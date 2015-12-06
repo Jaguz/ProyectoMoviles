@@ -3,6 +3,8 @@ package itesm.mx.proyectomoviles;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
+                if (isOnline()) {
                 Intent intent = new Intent(MainActivity.this, proyectoIn.class);
                 Intent intent2 = new Intent(MainActivity.this, Staff.class);
 
@@ -66,7 +68,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivityForResult(intent2, 1);
                     }
                 }
-                
+            }
+                else
+                    Toast.makeText(MainActivity.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+
             }
 
         };
@@ -152,4 +157,13 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+        public boolean isOnline() {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                return true;
+            }
+            return false;
+        }
 }

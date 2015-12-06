@@ -1,6 +1,8 @@
 package itesm.mx.proyectomoviles;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,6 +60,7 @@ public class encuesta extends AppCompatActivity {
         View.OnClickListener terminar = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isOnline()){
                 String r1 = respuesta1.getText().toString();
                 String r2 = respuesta2.getText().toString();
                 String r3 = respuesta3.getText().toString();
@@ -102,6 +105,9 @@ public class encuesta extends AppCompatActivity {
                 }
                 Toast.makeText(context, "Encuesta Enviada", Toast.LENGTH_LONG).show();
                 finish();
+            }
+                else
+                    Toast.makeText(encuesta.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
             }
         };
 
@@ -198,5 +204,13 @@ public class encuesta extends AppCompatActivity {
             }
             return result;
         }
+    }
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 }

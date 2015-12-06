@@ -53,16 +53,23 @@ public class Staff extends AppCompatActivity {
         }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
         Toast.makeText(this, "Finalizado", Toast.LENGTH_SHORT).show();
         final AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
+
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent (Staff.this, proyectoInStaff.class);
-                Proyecto proyecto = adapter.getItem(position);
-                intent.putExtra("espacio", proyecto.getEspacio());
-                intent.putExtra("proyecto", proyecto.getProyecto());
-                intent.putExtra("incubadora", proyecto.getIncubadora());
-                intent.putExtra("username", nombreUsuario.getText());
-                startActivity(intent);
+                if(isOnline()) {
+                    Intent intent = new Intent(Staff.this, proyectoInStaff.class);
+                    Proyecto proyecto = adapter.getItem(position);
+                    intent.putExtra("espacio", proyecto.getEspacio());
+                    intent.putExtra("proyecto", proyecto.getProyecto());
+                    intent.putExtra("incubadora", proyecto.getIncubadora());
+                    intent.putExtra("username", nombreUsuario.getText());
+                    startActivity(intent);
+                }
+                else
+                    Toast.makeText(Staff.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
             }
+
         };
         proyectoLV.setOnItemClickListener(itemListener);
     }
@@ -113,7 +120,14 @@ public class Staff extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
+    }
 
 
 }
