@@ -74,7 +74,7 @@ public class filtrosMonitoreo extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 }
                 else
-                    Toast.makeText(filtrosMonitoreo.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(filtrosMonitoreo.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -97,7 +97,7 @@ public class filtrosMonitoreo extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 }
                 else
-                    Toast.makeText(filtrosMonitoreo.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(filtrosMonitoreo.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
 

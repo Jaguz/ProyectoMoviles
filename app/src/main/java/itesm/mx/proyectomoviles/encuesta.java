@@ -62,15 +62,55 @@ public class encuesta extends AppCompatActivity {
             public void onClick(View v) {
                 if(isOnline()){
                 String r1 = respuesta1.getText().toString();
+                    if(r1.equals("")||Integer.parseInt(r1)>5||Integer.parseInt(r1)<1) {
+                        Toast.makeText(encuesta.this, "Favor de completar la encuesta con respuestas vaildas.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 String r2 = respuesta2.getText().toString();
+                    if(r2.equals("")||Integer.parseInt(r2)>5||Integer.parseInt(r2)<1){
+                        Toast.makeText(encuesta.this, "Favor de completar la encuesta con respuestas vaildas.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 String r3 = respuesta3.getText().toString();
+                    if(r3.equals("")||Integer.parseInt(r3)>5||Integer.parseInt(r3)<1){
+                        Toast.makeText(encuesta.this, "Favor de completar la encuesta con respuestas vaildas.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 String r4 = respuesta4.getText().toString();
+                    if(r4.equals("")||Integer.parseInt(r4)>5||Integer.parseInt(r4)<1){
+                        Toast.makeText(encuesta.this, "Favor de completar la encuesta con respuestas vaildas.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 String r5 = respuesta5.getText().toString();
+                    if(r5.equals("")||Integer.parseInt(r5)>5||Integer.parseInt(r5)<1){
+                        Toast.makeText(encuesta.this, "Favor de completar la encuesta con respuestas vaildas.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 String r6 = respuesta6.getText().toString();
+                    if(r6.equals("")||Integer.parseInt(r6)>5||Integer.parseInt(r6)<1){
+                        Toast.makeText(encuesta.this, "Favor de completar la encuesta con respuestas vaildas.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 String r7 = respuesta7.getText().toString();
+                    if(r7.equals("")){
+                        Toast.makeText(encuesta.this, "Favor de completar la encuesta con respuestas vaildas.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 String r8 = respuesta8.getText().toString();
+                    if(r8.equals("")){
+                        Toast.makeText(encuesta.this, "Favor de completar la encuesta con respuestas vaildas.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 String r9 = respuesta9.getText().toString();
+                    if(r9.equals("")){
+                        Toast.makeText(encuesta.this, "Favor de completar la encuesta con respuestas vaildas.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 String r10 = respuesta10.getText().toString();
+                    if(r10.equals("")){
+                        Toast.makeText(encuesta.this, "Favor de completar la encuesta con respuestas vaildas.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 String proyecto = datos.getString("proyecto");
                 String incubadora = datos.getString("incubadora");
                 String espacio = datos.getString("espacio");
@@ -107,7 +147,7 @@ public class encuesta extends AppCompatActivity {
                 finish();
             }
                 else
-                    Toast.makeText(encuesta.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(encuesta.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -125,7 +165,7 @@ public class encuesta extends AppCompatActivity {
                         String fecha = columns.getJSONObject(1).getString("v");
                         fechas.add(fecha);
                     }
-                    spin_adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, fechas);
+                    spin_adapter = new ArrayAdapter<String>(context, R.layout.my_spinner, fechas);
                     spin_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner.setAdapter(spin_adapter);
 

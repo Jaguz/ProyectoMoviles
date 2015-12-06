@@ -85,7 +85,7 @@ public class asistenciaAlumnosTec extends Activity implements AdapterView.OnItem
                         String fecha = columns.getJSONObject(1).getString("v");
                         fechas.add(fecha);
                     }
-                    spin_adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, fechas);
+                    spin_adapter = new ArrayAdapter<String>(context,  R.layout.my_spinner, fechas);
                     spin_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner.setAdapter(spin_adapter);
 
@@ -103,62 +103,64 @@ public class asistenciaAlumnosTec extends Activity implements AdapterView.OnItem
 
             @Override
             public void onClick(View v) {
-                String str1 = Integer.toString(adapter.counter);
-                String str2 = spinner.getSelectedItem().toString();
-                String str3 = datos.getString("proyecto");
-                String str4 = datos.getString("incubadora");
-                String str5 = datos.getString("espacio");
-                String str6 = Integer.toString(list.size());
-                String urlParameters="";
-                try {
-                    urlParameters = "entry_366698164=" + URLEncoder.encode(str1, "UTF-8") + "&" +
-                            "entry_1218448724=" + URLEncoder.encode(str2, "UTF-8") + "&" +
-                            "entry_1905273648=" + URLEncoder.encode(str3, "UTF-8") + "&" +
-                            "entry_2086384079=" + URLEncoder.encode(str4, "UTF-8") + "&" +
-                            "entry_1704396944=" + URLEncoder.encode(str5, "UTF-8") + "&" +
-                            "entry_446605895=" + URLEncoder.encode(str6, "UTF-8");
-                    new PostTask(new AsyncResult() {
-                        @Override
-                        public void onResult(JSONObject object) {
-
-                        }
-                    }).execute(urlParameters);
-                }
-                catch (UnsupportedEncodingException ex) {
-                    Toast.makeText(asistenciaAlumnosTec.this,"D=", Toast.LENGTH_LONG).show();
-                }
-                System.out.println(urlParameters);
-                Toast.makeText(asistenciaAlumnosTec.this, "Se han registrado " +Integer.toString(adapter.counter)+" asistencias.", Toast.LENGTH_SHORT).show();
-
-                for(int i=0; i<list.size(); i++){
-                    CheckBox checkbox = (CheckBox) alumnosLV.getChildAt(i).findViewById(R.id.checkBox1);
-                    str1 = list.get(i).getName();
-                    str2 = datos.getString("proyecto");
-                    str3 = datos.getString("incubadora");
-                    str4 = datos.getString("espacio");
-                    str5 = spinner.getSelectedItem().toString();
-                    str6 = checkbox.isChecked()?"1":"0";
-                    urlParameters="";
+                if(isOnline()) {
+                    String str1 = Integer.toString(adapter.counter);
+                    String str2 = spinner.getSelectedItem().toString();
+                    String str3 = datos.getString("proyecto");
+                    String str4 = datos.getString("incubadora");
+                    String str5 = datos.getString("espacio");
+                    String str6 = Integer.toString(list.size());
+                    String urlParameters = "";
                     try {
-                        urlParameters = "entry_324389209=" + URLEncoder.encode(str1, "UTF-8") + "&" +
-                                "entry_885529990=" + URLEncoder.encode(str2, "UTF-8") + "&" +
-                                "entry_972164826=" + URLEncoder.encode(str3, "UTF-8") + "&" +
-                                "entry_1693376882=" + URLEncoder.encode(str4, "UTF-8") + "&" +
-                                "entry_50541225=" + URLEncoder.encode(str5, "UTF-8") + "&" +
-                                "entry_1562616259=" + URLEncoder.encode(str6, "UTF-8");
-                        new PostInd(new AsyncResult() {
+                        urlParameters = "entry_366698164=" + URLEncoder.encode(str1, "UTF-8") + "&" +
+                                "entry_1218448724=" + URLEncoder.encode(str2, "UTF-8") + "&" +
+                                "entry_1905273648=" + URLEncoder.encode(str3, "UTF-8") + "&" +
+                                "entry_2086384079=" + URLEncoder.encode(str4, "UTF-8") + "&" +
+                                "entry_1704396944=" + URLEncoder.encode(str5, "UTF-8") + "&" +
+                                "entry_446605895=" + URLEncoder.encode(str6, "UTF-8");
+                        new PostTask(new AsyncResult() {
                             @Override
                             public void onResult(JSONObject object) {
 
                             }
                         }).execute(urlParameters);
+                    } catch (UnsupportedEncodingException ex) {
+                        Toast.makeText(asistenciaAlumnosTec.this, "D=", Toast.LENGTH_LONG).show();
                     }
-                    catch (UnsupportedEncodingException ex) {
-                        Toast.makeText(asistenciaAlumnosTec.this,"D=", Toast.LENGTH_LONG).show();
-                    }
-                }
+                    System.out.println(urlParameters);
+                    Toast.makeText(asistenciaAlumnosTec.this, "Se han registrado " + Integer.toString(adapter.counter) + " asistencias.", Toast.LENGTH_SHORT).show();
 
-                finish();
+                    for (int i = 0; i < list.size(); i++) {
+                        CheckBox checkbox = (CheckBox) alumnosLV.getChildAt(i).findViewById(R.id.checkBox1);
+                        str1 = list.get(i).getName();
+                        str2 = datos.getString("proyecto");
+                        str3 = datos.getString("incubadora");
+                        str4 = datos.getString("espacio");
+                        str5 = spinner.getSelectedItem().toString();
+                        str6 = checkbox.isChecked() ? "1" : "0";
+                        urlParameters = "";
+                        try {
+                            urlParameters = "entry_324389209=" + URLEncoder.encode(str1, "UTF-8") + "&" +
+                                    "entry_885529990=" + URLEncoder.encode(str2, "UTF-8") + "&" +
+                                    "entry_972164826=" + URLEncoder.encode(str3, "UTF-8") + "&" +
+                                    "entry_1693376882=" + URLEncoder.encode(str4, "UTF-8") + "&" +
+                                    "entry_50541225=" + URLEncoder.encode(str5, "UTF-8") + "&" +
+                                    "entry_1562616259=" + URLEncoder.encode(str6, "UTF-8");
+                            new PostInd(new AsyncResult() {
+                                @Override
+                                public void onResult(JSONObject object) {
+
+                                }
+                            }).execute(urlParameters);
+                        } catch (UnsupportedEncodingException ex) {
+                            Toast.makeText(asistenciaAlumnosTec.this, "D=", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    finish();
+                }
+                else
+                    Toast.makeText(asistenciaAlumnosTec.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
         guardarBtn.setOnClickListener(guardar);
@@ -167,12 +169,16 @@ public class asistenciaAlumnosTec extends Activity implements AdapterView.OnItem
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(asistenciaAlumnosTec.this, AgregarAlumnoTec.class);
-                intent.putExtra("proyecto", datos.getString("proyecto"));
-                intent.putExtra("espacio", datos.getString("espacio"));
-                intent.putExtra("incubadora", datos.getString("incubadora"));
-                intent.putExtra("username", nombreUsuario.getText());
-                startActivityForResult(intent, 1);
+                if (isOnline()) {
+                    Intent intent = new Intent(asistenciaAlumnosTec.this, AgregarAlumno.class);
+                    intent.putExtra("proyecto", datos.getString("proyecto"));
+                    intent.putExtra("espacio", datos.getString("espacio"));
+                    intent.putExtra("incubadora", datos.getString("incubadora"));
+                    intent.putExtra("username", nombreUsuario.getText());
+                    startActivityForResult(intent, 1);
+                }
+                else
+                    Toast.makeText(asistenciaAlumnosTec.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
         agregarBtn.setOnClickListener(agregar);
@@ -354,5 +360,13 @@ public class asistenciaAlumnosTec extends Activity implements AdapterView.OnItem
             }
             return result;
         }
+    }
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -48,7 +48,7 @@ public class proyectoInStaff extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 }
                 else
-                    Toast.makeText(proyectoInStaff.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(proyectoInStaff.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -65,7 +65,7 @@ public class proyectoInStaff extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 }
                 else
-                    Toast.makeText(proyectoInStaff.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(proyectoInStaff.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
         asistenciaButton.setOnClickListener(asistencia);
@@ -75,12 +75,16 @@ public class proyectoInStaff extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(proyectoInStaff.this, asistenciaAlumnosTec.class);
-                intent.putExtra("proyecto", datos.getString("proyecto"));
-                intent.putExtra("espacio", datos.getString("espacio"));
-                intent.putExtra("incubadora", datos.getString("incubadora"));
-                intent.putExtra("username", nombreUsuario.getText());
-                startActivityForResult(intent,1);
+                if(isOnline()) {
+                    Intent intent = new Intent(proyectoInStaff.this, asistenciaAlumnosTec.class);
+                    intent.putExtra("proyecto", datos.getString("proyecto"));
+                    intent.putExtra("espacio", datos.getString("espacio"));
+                    intent.putExtra("incubadora", datos.getString("incubadora"));
+                    intent.putExtra("username", nombreUsuario.getText());
+                    startActivityForResult(intent,1);
+                }
+                else
+                    Toast.makeText(proyectoInStaff.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
         alumnosBtn.setOnClickListener(alumnos);

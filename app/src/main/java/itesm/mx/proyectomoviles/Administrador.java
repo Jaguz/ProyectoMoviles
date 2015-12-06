@@ -79,7 +79,7 @@ public class Administrador extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 }
                 else
-                    Toast.makeText(Administrador.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Administrador.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -87,18 +87,22 @@ public class Administrador extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String incubadora = " ";
-                String espacio = " ";
-                String proyecto = " ";
-                incubadora = incSpin.getSelectedItem().toString();
-                espacio = espSpin.getSelectedItem().toString();
-                proyecto = proySpin.getSelectedItem().toString();
-                Intent intent = new Intent (Administrador.this, RevisionAsistenciaTec.class);
-                intent.putExtra("username", datos.getString("username"));
-                intent.putExtra("incubadora", incubadora);
-                intent.putExtra("espacio", espacio);
-                intent.putExtra("proyecto", proyecto);
-                startActivityForResult(intent, 1);
+                if(isOnline()) {
+                    String incubadora = " ";
+                    String espacio = " ";
+                    String proyecto = " ";
+                    incubadora = incSpin.getSelectedItem().toString();
+                    espacio = espSpin.getSelectedItem().toString();
+                    proyecto = proySpin.getSelectedItem().toString();
+                    Intent intent = new Intent(Administrador.this, RevisionAsistenciaTec.class);
+                    intent.putExtra("username", datos.getString("username"));
+                    intent.putExtra("incubadora", incubadora);
+                    intent.putExtra("espacio", espacio);
+                    intent.putExtra("proyecto", proyecto);
+                    startActivityForResult(intent, 1);
+                }
+                else
+                    Toast.makeText(Administrador.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
 

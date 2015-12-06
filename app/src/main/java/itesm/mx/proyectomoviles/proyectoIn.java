@@ -41,7 +41,7 @@ public class proyectoIn extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 }
                 else
-                    Toast.makeText(proyectoIn.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(proyectoIn.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -55,7 +55,7 @@ public class proyectoIn extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 }
                 else
-                    Toast.makeText(proyectoIn.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(proyectoIn.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
         asistenciaButton.setOnClickListener(asistencia);
