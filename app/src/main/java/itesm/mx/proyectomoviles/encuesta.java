@@ -1,6 +1,8 @@
 package itesm.mx.proyectomoviles;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,6 +60,7 @@ public class encuesta extends AppCompatActivity {
         View.OnClickListener terminar = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isOnline()){
                 String r1 = respuesta1.getText().toString();
                 String r2 = respuesta2.getText().toString();
                 String r3 = respuesta3.getText().toString();
@@ -89,7 +92,7 @@ public class encuesta extends AppCompatActivity {
                             "entry_145679237=" + URLEncoder.encode(r10, "UTF-8") + "&" +
                             "entry_1186180893=" + URLEncoder.encode(incubadora, "UTF-8") + "&" +
                             "entry_1140484594=" + URLEncoder.encode(espacio, "UTF-8") + "&" +
-                            "entry_1863821886=" + URLEncoder.encode(proyecto, "UTF-8") + "& " +
+                            "entry_1863821886=" + URLEncoder.encode(proyecto, "UTF-8") + "&" +
                             "entry_173526216=" + URLEncoder.encode(fecha, "UTF-8");
                     new PostTask(new AsyncResult() {
                         @Override
@@ -100,8 +103,11 @@ public class encuesta extends AppCompatActivity {
                 } catch (UnsupportedEncodingException e) {
                     Toast.makeText(encuesta.this, "ño", Toast.LENGTH_LONG).show();
                 }
-
+                Toast.makeText(context, "Encuesta Enviada", Toast.LENGTH_LONG).show();
                 finish();
+            }
+                else
+                    Toast.makeText(encuesta.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
             }
         };
 
@@ -198,5 +204,13 @@ public class encuesta extends AppCompatActivity {
             }
             return result;
         }
+    }
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 }

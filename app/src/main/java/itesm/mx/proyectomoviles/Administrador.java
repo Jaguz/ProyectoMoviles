@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,18 +64,22 @@ public class Administrador extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String incubadora = " ";
-                String espacio = " ";
-                String proyecto = " ";
-                incubadora = incSpin.getSelectedItem().toString();
-                espacio = espSpin.getSelectedItem().toString();
-                proyecto = proySpin.getSelectedItem().toString();
-                Intent intent = new Intent (Administrador.this, RevisionAsistencia.class);
-                intent.putExtra("username", datos.getString("username"));
-                intent.putExtra("incubadora", incubadora);
-                intent.putExtra("espacio", espacio);
-                intent.putExtra("proyecto", proyecto);
-                startActivityForResult(intent, 1);
+                if(isOnline()) {
+                    String incubadora = " ";
+                    String espacio = " ";
+                    String proyecto = " ";
+                    incubadora = incSpin.getSelectedItem().toString();
+                    espacio = espSpin.getSelectedItem().toString();
+                    proyecto = proySpin.getSelectedItem().toString();
+                    Intent intent = new Intent(Administrador.this, RevisionAsistencia.class);
+                    intent.putExtra("username", datos.getString("username"));
+                    intent.putExtra("incubadora", incubadora);
+                    intent.putExtra("espacio", espacio);
+                    intent.putExtra("proyecto", proyecto);
+                    startActivityForResult(intent, 1);
+                }
+                else
+                    Toast.makeText(Administrador.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
             }
         };
 
@@ -178,6 +183,12 @@ public class Administrador extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
+    }
 }

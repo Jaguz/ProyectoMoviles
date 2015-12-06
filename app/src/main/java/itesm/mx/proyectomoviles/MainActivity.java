@@ -3,6 +3,8 @@ package itesm.mx.proyectomoviles;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
+                if (isOnline()) {
                 Intent intent = new Intent(MainActivity.this, proyectoIn.class);
                 Intent intent2 = new Intent(MainActivity.this, Staff.class);
 
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("password", passET.getText().toString());
                         startActivityForResult(intent, 1);
                     }
+
                 }
                 for (int i = 0; i < usuarioStaff.size(); i++) {
                     if (userET.getText().toString().equals(usuarioStaff.get(i)) &&
@@ -63,10 +66,14 @@ public class MainActivity extends AppCompatActivity {
                         intent2.putExtra("password", passET.getText().toString());
                         intent2.putExtra("espUser", espacio.get(i));
                         startActivityForResult(intent2, 1);
-
                     }
                 }
             }
+                else
+                    Toast.makeText(MainActivity.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+
+            }
+
         };
 
         new DownloadWebpageTask(new AsyncResult() {
@@ -150,4 +157,13 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+        public boolean isOnline() {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                return true;
+            }
+            return false;
+        }
 }
