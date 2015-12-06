@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#2E39B1"
+    android:background="#0039a6"
     android:id="@+id/layoutID">
     <View
         android:layout_width="match_parent"
@@ -38,11 +38,8 @@
         android:text="Proyecto:"
         android:id="@+id/textView5"
         android:textColor="#ffffff"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lugar"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_alignBottom="@+id/nameTV"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,7 +56,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/espacioTV"
-        android:layout_above="@+id/textView5"
+        android:layout_above="@+id/nameTV"
         android:layout_toEndOf="@+id/lugar" />
 
     <TextView
@@ -68,7 +65,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/nameTV"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_toEndOf="@+id/lugar" />
+        android:layout_below="@+id/lugar"
+        android:layout_toEndOf="@+id/lugar"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>

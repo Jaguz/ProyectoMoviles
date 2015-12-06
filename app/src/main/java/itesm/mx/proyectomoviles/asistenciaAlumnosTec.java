@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,9 +20,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +34,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class asistenciaStaff extends Activity implements OnItemClickListener{
+public class asistenciaAlumnosTec extends Activity implements AdapterView.OnItemClickListener {
     private static final String LOG_TAG = "";
     ArrayList<Alumnos> alumnos = new ArrayList<Alumnos>();
     ListView alumnosLV;
@@ -49,7 +47,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_asistencia_staff);
+        setContentView(R.layout.activity_asistencia_alumnos_tec);
         Toast.makeText(this, "Cargando", Toast.LENGTH_SHORT).show();
         alumnosLV = (ListView) findViewById(R.id.listaAlumnos);
         Button guardarBtn = (Button) findViewById(R.id.guardarBtn);
@@ -64,7 +62,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
             public void onResult(JSONObject object) {
                 processJson(object);
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
+        }).execute("https://spreadsheets.google.com/tq?key=12aBrk-jw5Dhfdh6otjHyufpl48HsKm6KQj255Nz5hEA");
 
         final Bundle datos = getIntent().getExtras();
 
@@ -113,12 +111,12 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                 String str6 = Integer.toString(list.size());
                 String urlParameters="";
                 try {
-                    urlParameters = "entry_1579137901=" + URLEncoder.encode(str1, "UTF-8") + "&" +
-                            "entry_1621524700=" + URLEncoder.encode(str2, "UTF-8") + "&" +
-                            "entry_995735811=" + URLEncoder.encode(str3, "UTF-8") + "&" +
-                            "entry_1657960210=" + URLEncoder.encode(str4, "UTF-8") + "&" +
-                            "entry_1376801195=" + URLEncoder.encode(str5, "UTF-8") + "&" +
-                            "entry_181768415=" + URLEncoder.encode(str6, "UTF-8");
+                    urlParameters = "entry_366698164=" + URLEncoder.encode(str1, "UTF-8") + "&" +
+                            "entry_1218448724=" + URLEncoder.encode(str2, "UTF-8") + "&" +
+                            "entry_1905273648=" + URLEncoder.encode(str3, "UTF-8") + "&" +
+                            "entry_2086384079=" + URLEncoder.encode(str4, "UTF-8") + "&" +
+                            "entry_1704396944=" + URLEncoder.encode(str5, "UTF-8") + "&" +
+                            "entry_446605895=" + URLEncoder.encode(str6, "UTF-8");
                     new PostTask(new AsyncResult() {
                         @Override
                         public void onResult(JSONObject object) {
@@ -127,10 +125,10 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                     }).execute(urlParameters);
                 }
                 catch (UnsupportedEncodingException ex) {
-                    Toast.makeText(asistenciaStaff.this,"D=", Toast.LENGTH_LONG).show();
+                    Toast.makeText(asistenciaAlumnosTec.this,"D=", Toast.LENGTH_LONG).show();
                 }
-               System.out.println(urlParameters);
-                Toast.makeText(asistenciaStaff.this, "Se han registrado " +Integer.toString(adapter.counter)+" asistencias.", Toast.LENGTH_SHORT).show();
+                System.out.println(urlParameters);
+                Toast.makeText(asistenciaAlumnosTec.this, "Se han registrado " +Integer.toString(adapter.counter)+" asistencias.", Toast.LENGTH_SHORT).show();
 
                 for(int i=0; i<list.size(); i++){
                     CheckBox checkbox = (CheckBox) alumnosLV.getChildAt(i).findViewById(R.id.checkBox1);
@@ -142,12 +140,12 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                     str6 = checkbox.isChecked()?"1":"0";
                     urlParameters="";
                     try {
-                        urlParameters = "entry_1736803261=" + URLEncoder.encode(str1, "UTF-8") + "&" +
-                                "entry_1389547154=" + URLEncoder.encode(str2, "UTF-8") + "&" +
-                                "entry_902302539=" + URLEncoder.encode(str3, "UTF-8") + "&" +
-                                "entry_324048957=" + URLEncoder.encode(str4, "UTF-8") + "&" +
-                                "entry_1743044751=" + URLEncoder.encode(str5, "UTF-8") + "&" +
-                                "entry_1372177941=" + URLEncoder.encode(str6, "UTF-8");
+                        urlParameters = "entry_324389209=" + URLEncoder.encode(str1, "UTF-8") + "&" +
+                                "entry_885529990=" + URLEncoder.encode(str2, "UTF-8") + "&" +
+                                "entry_972164826=" + URLEncoder.encode(str3, "UTF-8") + "&" +
+                                "entry_1693376882=" + URLEncoder.encode(str4, "UTF-8") + "&" +
+                                "entry_50541225=" + URLEncoder.encode(str5, "UTF-8") + "&" +
+                                "entry_1562616259=" + URLEncoder.encode(str6, "UTF-8");
                         new PostInd(new AsyncResult() {
                             @Override
                             public void onResult(JSONObject object) {
@@ -156,7 +154,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                         }).execute(urlParameters);
                     }
                     catch (UnsupportedEncodingException ex) {
-                        Toast.makeText(asistenciaStaff.this,"D=", Toast.LENGTH_LONG).show();
+                        Toast.makeText(asistenciaAlumnosTec.this,"D=", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -169,7 +167,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(asistenciaStaff.this, AgregarAlumno.class);
+                Intent intent = new Intent(asistenciaAlumnosTec.this, AgregarAlumnoTec.class);
                 intent.putExtra("proyecto", datos.getString("proyecto"));
                 intent.putExtra("espacio", datos.getString("espacio"));
                 intent.putExtra("incubadora", datos.getString("incubadora"));
@@ -255,7 +253,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
             public void onResult(JSONObject object) {
                 processJson(object);
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
+        }).execute("https://spreadsheets.google.com/tq?key=12aBrk-jw5Dhfdh6otjHyufpl48HsKm6KQj255Nz5hEA");
     }
 
 
@@ -274,7 +272,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
             Boolean result = true;
 
             try {
-                URL myUrl = new URL("https://docs.google.com/forms/d/1BE2CjR-kFxHqn1-h7TxISGzebAsR-itdAPeC_bPYSNo/formResponse");
+                URL myUrl = new URL("https://docs.google.com/forms/d/10ZJCyyfgJWoIjJvq57FAvvw95VtnWR_lLJ4M0M2Pgd4/formResponse");
                 connection = (HttpsURLConnection) myUrl.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("User-Agent", "ProyectoMoviles/1.0");
@@ -326,7 +324,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
             Boolean result = true;
 
             try {
-                URL myUrl = new URL("https://docs.google.com/forms/d/1X_Dh77rhmysLXf8NwbJI0AVCS8WfyhzmXAF2B1GH2HY/formResponse");
+                URL myUrl = new URL("https://docs.google.com/forms/d/1yMw8EHn5LWqy1YZDak_2J-r6WtOpHUJUzLiF1h_ZaAw/formResponse");
                 connection = (HttpsURLConnection) myUrl.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("User-Agent", "ProyectoMoviles/1.0");

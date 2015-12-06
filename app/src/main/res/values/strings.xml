@@ -13,4 +13,11 @@
     <string name="title_activity_asistencia_staff">asistenciaStaff</string>
     <string name="title_activity_encuesta">encuesta</string>
     <string name="title_activity_revision_asistencia">RevisionAsistencia</string>
+    <string name="title_activity_filtros_monitoreo">filtrosMonitoreo</string>
+    <string name="title_activity_cuanti">Cuanti</string>
+    <string name="title_activity_cuali">Cuali</string>
+    <string name="title_activity_agregar_alumno">AgregarAlumno</string>
+    <string name="title_activity_asistencia_alumnos_tec">asistenciaAlumnosTec</string>
+    <string name="title_activity_agregar_alumno_tec">AgregarAlumnoTec</string>
+    <string name="title_activity_revision_asistencia_tec">RevisionAsistenciaTec</string>
 </resources>

@@ -1,36 +1,29 @@
 package itesm.mx.proyectomoviles;
 
-/**
- * Created by Javier on 11/16/2015.
- */
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class TableMainLayout extends RelativeLayout {
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Created by Javier on 11/30/2015.
+ */
+public class TableTecLayout extends RelativeLayout {
     public final String TAG = "TableMainLayout.java";
 
     List<String> fechas = new ArrayList<String>();
@@ -60,7 +53,7 @@ public class TableMainLayout extends RelativeLayout {
     int cantFechas[];
     int maxTot;
     double a, b;
-    public TableMainLayout(Context contex, final String filterInc, final String filterEsp, final String filterProy) {
+    public TableTecLayout(Context contex, final String filterInc, final String filterEsp, final String filterProy) {
 
         super(contex);
 
@@ -230,9 +223,9 @@ public class TableMainLayout extends RelativeLayout {
                     }).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1ECcVX2RlkyILoUxpX5eVbtt8gfo7GgdyGAJKxhT8JVk");
+            }
+        }).execute("https://spreadsheets.google.com/tq?key=10JjSyhjx6A6bQAleLXDbmj8WHZ5FfpwQSNtdBkpUPWQ");//Change this
 
 
     }
@@ -279,13 +272,13 @@ public class TableMainLayout extends RelativeLayout {
 
         // RelativeLayout params were very useful here
         // the addRule method is the key to arrange the components properly
-        RelativeLayout.LayoutParams componentB_Params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams componentB_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         componentB_Params.addRule(RelativeLayout.RIGHT_OF, this.tableA.getId());
 
-        RelativeLayout.LayoutParams componentC_Params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams componentC_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         componentC_Params.addRule(RelativeLayout.BELOW, this.tableA.getId());
 
-        RelativeLayout.LayoutParams componentD_Params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams componentD_Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         componentD_Params.addRule(RelativeLayout.RIGHT_OF, this.scrollViewC.getId());
         componentD_Params.addRule(RelativeLayout.BELOW, this.horizontalScrollViewB.getId());
 
@@ -313,7 +306,7 @@ public class TableMainLayout extends RelativeLayout {
         TableRow componentATableRow = new TableRow(this.context);
         int headerFieldCount = 3;
 
-        TableRow.LayoutParams params = new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         params.setMargins(1, 0, 1, 2);
 
         for(int x=0; x<3; x++){
@@ -330,7 +323,7 @@ public class TableMainLayout extends RelativeLayout {
         TableRow componentBTableRow = new TableRow(this.context);
         int headerFieldCount = this.fechas.size();
 
-        TableRow.LayoutParams params = new TableRow.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         params.setMargins(1, 0, 1, 2);
 
         for(int x=0; x<(headerFieldCount-3); x++){
@@ -347,7 +340,7 @@ public class TableMainLayout extends RelativeLayout {
 
         // just seeing some header cell width
         for(int x=0; x<this.headerCellsWidth.length; x++){
-            Log.v("TableMainLayout.java", this.headerCellsWidth[x]+"");
+            Log.v("TableMainLayout.java", this.headerCellsWidth[x] + "");
         }
 
         for(SampleObject sampleObject : this.sampleObjects){
@@ -373,18 +366,18 @@ public class TableMainLayout extends RelativeLayout {
         List<String> info = sampleObject.asistencias;
         String incu = sampleObject.header1, espa = sampleObject.header2, proye= sampleObject.header3;
 
-        TableRow.LayoutParams params = new TableRow.LayoutParams( headerCellsWidth[0],LayoutParams.MATCH_PARENT);
+        TableRow.LayoutParams params = new TableRow.LayoutParams( headerCellsWidth[0], RelativeLayout.LayoutParams.MATCH_PARENT);
         params.setMargins(2, 0, 0, 2);
         TextView textViewB;
         textViewB = this.bodyTextView(incu);
         tableRowForTableC.addView(textViewB, params);
 
-        TableRow.LayoutParams params2 = new TableRow.LayoutParams( headerCellsWidth[1],LayoutParams.MATCH_PARENT);
+        TableRow.LayoutParams params2 = new TableRow.LayoutParams( headerCellsWidth[1], RelativeLayout.LayoutParams.MATCH_PARENT);
         params2.setMargins(2, 0, 0, 2);
         textViewB = this.bodyTextView(espa);
         tableRowForTableC.addView(textViewB, params2);
 
-        TableRow.LayoutParams params3 = new TableRow.LayoutParams( headerCellsWidth[2],LayoutParams.MATCH_PARENT);
+        TableRow.LayoutParams params3 = new TableRow.LayoutParams( headerCellsWidth[2], RelativeLayout.LayoutParams.MATCH_PARENT);
         params3.setMargins(2, 0, 1, 2);
         textViewB = this.bodyTextView(proye);
         tableRowForTableC.addView(textViewB, params3);
@@ -401,7 +394,7 @@ public class TableMainLayout extends RelativeLayout {
         List<String> info = sampleObject.asistencias;
 
         for(int x=0 ; x<loopCount; x++){
-            TableRow.LayoutParams params = new TableRow.LayoutParams( headerCellsWidth[x+3],LayoutParams.MATCH_PARENT);
+            TableRow.LayoutParams params = new TableRow.LayoutParams( headerCellsWidth[x+3], RelativeLayout.LayoutParams.MATCH_PARENT);
             params.setMargins(1, 0, 1, 2);
             TextView textViewB;
             if(x<info.size()) {

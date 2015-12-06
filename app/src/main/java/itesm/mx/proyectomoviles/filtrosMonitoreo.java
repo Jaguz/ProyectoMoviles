@@ -1,20 +1,14 @@
 package itesm.mx.proyectomoviles;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,7 +19,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Administrador extends AppCompatActivity {
+public class filtrosMonitoreo extends AppCompatActivity {
     private static final String LOG_TAG = "";
     List<String> proyectos = new ArrayList<String>();
     List<String> espacios = new ArrayList<String>();
@@ -33,21 +27,20 @@ public class Administrador extends AppCompatActivity {
     ArrayAdapter<String> proyAdapter;
     ArrayAdapter<String> espAdapter;
     ArrayAdapter<String> incAdapter;
-    Button cargarBT;
-    Button alumnosBT;
+    Button cuantiBT;
+    Button cualiBT;
     Context context;
     Spinner incSpin;
     Spinner espSpin;
     Spinner proySpin;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_administrador);
+        setContentView(R.layout.activity_filtros_monitoreo);
         context = this;
         TextView nameTV = (TextView) findViewById(R.id.nameTV);
-        cargarBT = (Button) findViewById(R.id.proyectosBT);
-        alumnosBT = (Button) findViewById(R.id.alumnosBtn);
+        cuantiBT = (Button) findViewById(R.id.proyectosBT);
+        cualiBT = (Button) findViewById(R.id.cualiBT);
         incSpin = (Spinner) findViewById(R.id.spinInc);
         espSpin = (Spinner) findViewById(R.id.spinEsp);
         proySpin = (Spinner) findViewById(R.id.spinProy);
@@ -59,7 +52,7 @@ public class Administrador extends AppCompatActivity {
         espacios.add("-");
         incubadoras.add("-");
 
-        final View.OnClickListener verAsistencia = new View.OnClickListener() {
+        final View.OnClickListener verCuanti = new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -69,7 +62,7 @@ public class Administrador extends AppCompatActivity {
                 incubadora = incSpin.getSelectedItem().toString();
                 espacio = espSpin.getSelectedItem().toString();
                 proyecto = proySpin.getSelectedItem().toString();
-                Intent intent = new Intent (Administrador.this, RevisionAsistencia.class);
+                Intent intent = new Intent (filtrosMonitoreo.this, Cuanti.class);
                 intent.putExtra("username", datos.getString("username"));
                 intent.putExtra("incubadora", incubadora);
                 intent.putExtra("espacio", espacio);
@@ -78,7 +71,7 @@ public class Administrador extends AppCompatActivity {
             }
         };
 
-        final View.OnClickListener AsistenciaAlumnos = new View.OnClickListener() {
+        final View.OnClickListener verCuali = new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -88,7 +81,7 @@ public class Administrador extends AppCompatActivity {
                 incubadora = incSpin.getSelectedItem().toString();
                 espacio = espSpin.getSelectedItem().toString();
                 proyecto = proySpin.getSelectedItem().toString();
-                Intent intent = new Intent (Administrador.this, RevisionAsistenciaTec.class);
+                Intent intent = new Intent (filtrosMonitoreo.this, Cuali.class);
                 intent.putExtra("username", datos.getString("username"));
                 intent.putExtra("incubadora", incubadora);
                 intent.putExtra("espacio", espacio);
@@ -101,8 +94,8 @@ public class Administrador extends AppCompatActivity {
             @Override
             public void onResult(JSONObject object) {
                 processJson(object);
-                cargarBT.setOnClickListener(verAsistencia);
-                alumnosBT.setOnClickListener(AsistenciaAlumnos);
+                cuantiBT.setOnClickListener(verCuanti);
+                cualiBT.setOnClickListener(verCuali);
             }
         }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
 
@@ -153,7 +146,6 @@ public class Administrador extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override

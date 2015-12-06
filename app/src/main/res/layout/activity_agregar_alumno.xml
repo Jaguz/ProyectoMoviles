@@ -4,9 +4,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="itesm.mx.proyectomoviles.proyectoInStaff"
+    tools:context="itesm.mx.proyectomoviles.AgregarAlumno"
     android:background="#0039a6"
-    android:id="@+id/stahp">
+    android:id="@+id/agregarActXML">
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,19 +44,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Asistencia Beneficiarios"
-        android:id="@+id/asistenciaBT"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Monitoreo"
-        android:id="@+id/monitoreoBT"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/alumnosBtn"
-        android:layout_centerHorizontal="true" />
+        android:text="Agregar"
+        android:id="@+id/agregarBT"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="42dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -79,13 +71,26 @@
         android:layout_toEndOf="@+id/textView12"
         android:layout_marginLeft="20dp" />
 
-    <Button
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Asistencia Alumnos"
-        android:id="@+id/alumnosBtn"
-        android:layout_below="@+id/asistenciaBT"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp" />
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:textColor="#bcbcbc"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:hint="nuevo alumno" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Nombre del Alumno"
+        android:id="@+id/textView13"
+        android:layout_above="@+id/editText"
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>
