@@ -1,6 +1,9 @@
 package itesm.mx.proyectomoviles;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -31,9 +35,13 @@ public class proyectoIn extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(proyectoIn.this, Administrador.class);
-                intent.putExtra("username", datos.getString("username"));
-                startActivityForResult(intent,1);
+                if(isOnline()) {
+                    Intent intent = new Intent(proyectoIn.this, Administrador.class);
+                    intent.putExtra("username", datos.getString("username"));
+                    startActivityForResult(intent, 1);
+                }
+                else
+                    Toast.makeText(proyectoIn.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
             }
         };
 
@@ -41,9 +49,13 @@ public class proyectoIn extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(proyectoIn.this, filtrosMonitoreo.class);
-                intent.putExtra("username", datos.getString("username"));
-                startActivityForResult(intent,1);
+                if(isOnline()) {
+                    Intent intent = new Intent(proyectoIn.this, filtrosMonitoreo.class);
+                    intent.putExtra("username", datos.getString("username"));
+                    startActivityForResult(intent, 1);
+                }
+                else
+                    Toast.makeText(proyectoIn.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
             }
         };
         asistenciaButton.setOnClickListener(asistencia);
@@ -78,5 +90,13 @@ public class proyectoIn extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 }

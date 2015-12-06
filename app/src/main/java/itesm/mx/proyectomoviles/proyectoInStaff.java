@@ -1,6 +1,9 @@
 package itesm.mx.proyectomoviles;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class proyectoInStaff extends AppCompatActivity {
     private static final String LOG_TAG = "";
@@ -35,12 +39,16 @@ public class proyectoInStaff extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(proyectoInStaff.this, encuesta.class);
-                intent.putExtra("proyecto", datos.getString("proyecto"));
-                intent.putExtra("espacio", datos.getString("espacio"));
-                intent.putExtra("incubadora", datos.getString("incubadora"));
-                intent.putExtra("username", nombreUsuario.getText());
-                startActivityForResult(intent, 1);
+                if (isOnline()) {
+                    Intent intent = new Intent(proyectoInStaff.this, encuesta.class);
+                    intent.putExtra("proyecto", datos.getString("proyecto"));
+                    intent.putExtra("espacio", datos.getString("espacio"));
+                    intent.putExtra("incubadora", datos.getString("incubadora"));
+                    intent.putExtra("username", nombreUsuario.getText());
+                    startActivityForResult(intent, 1);
+                }
+                else
+                    Toast.makeText(proyectoInStaff.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
             }
         };
 
@@ -48,12 +56,16 @@ public class proyectoInStaff extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(proyectoInStaff.this, asistenciaStaff.class);
-                intent.putExtra("proyecto", datos.getString("proyecto"));
-                intent.putExtra("espacio", datos.getString("espacio"));
-                intent.putExtra("incubadora", datos.getString("incubadora"));
-                intent.putExtra("username", nombreUsuario.getText());
-                startActivityForResult(intent,1);
+                if(isOnline()) {
+                    Intent intent = new Intent(proyectoInStaff.this, asistenciaStaff.class);
+                    intent.putExtra("proyecto", datos.getString("proyecto"));
+                    intent.putExtra("espacio", datos.getString("espacio"));
+                    intent.putExtra("incubadora", datos.getString("incubadora"));
+                    intent.putExtra("username", nombreUsuario.getText());
+                    startActivityForResult(intent, 1);
+                }
+                else
+                    Toast.makeText(proyectoInStaff.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
             }
         };
         asistenciaButton.setOnClickListener(asistencia);
@@ -97,5 +109,13 @@ public class proyectoInStaff extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -105,13 +105,14 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
 
             @Override
             public void onClick(View v) {
+                if(isOnline()){
                 String str1 = Integer.toString(adapter.counter);
                 String str2 = spinner.getSelectedItem().toString();
                 String str3 = datos.getString("proyecto");
                 String str4 = datos.getString("incubadora");
                 String str5 = datos.getString("espacio");
                 String str6 = Integer.toString(list.size());
-                String urlParameters="";
+                String urlParameters = "";
                 try {
                     urlParameters = "entry_1579137901=" + URLEncoder.encode(str1, "UTF-8") + "&" +
                             "entry_1621524700=" + URLEncoder.encode(str2, "UTF-8") + "&" +
@@ -125,22 +126,21 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
 
                         }
                     }).execute(urlParameters);
+                } catch (UnsupportedEncodingException ex) {
+                    Toast.makeText(asistenciaStaff.this, "D=", Toast.LENGTH_LONG).show();
                 }
-                catch (UnsupportedEncodingException ex) {
-                    Toast.makeText(asistenciaStaff.this,"D=", Toast.LENGTH_LONG).show();
-                }
-               System.out.println(urlParameters);
-                Toast.makeText(asistenciaStaff.this, "Se han registrado " +Integer.toString(adapter.counter)+" asistencias.", Toast.LENGTH_SHORT).show();
+                System.out.println(urlParameters);
+                Toast.makeText(asistenciaStaff.this, "Se han registrado " + Integer.toString(adapter.counter) + " asistencias.", Toast.LENGTH_SHORT).show();
 
-                for(int i=0; i<list.size(); i++){
+                for (int i = 0; i < list.size(); i++) {
                     CheckBox checkbox = (CheckBox) alumnosLV.getChildAt(i).findViewById(R.id.checkBox1);
                     str1 = list.get(i).getName();
                     str2 = datos.getString("proyecto");
                     str3 = datos.getString("incubadora");
                     str4 = datos.getString("espacio");
                     str5 = spinner.getSelectedItem().toString();
-                    str6 = checkbox.isChecked()?"1":"0";
-                    urlParameters="";
+                    str6 = checkbox.isChecked() ? "1" : "0";
+                    urlParameters = "";
                     try {
                         urlParameters = "entry_1736803261=" + URLEncoder.encode(str1, "UTF-8") + "&" +
                                 "entry_1389547154=" + URLEncoder.encode(str2, "UTF-8") + "&" +
@@ -154,13 +154,15 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
 
                             }
                         }).execute(urlParameters);
-                    }
-                    catch (UnsupportedEncodingException ex) {
-                        Toast.makeText(asistenciaStaff.this,"D=", Toast.LENGTH_LONG).show();
+                    } catch (UnsupportedEncodingException ex) {
+                        Toast.makeText(asistenciaStaff.this, "D=", Toast.LENGTH_LONG).show();
                     }
                 }
 
                 finish();
+            }
+                else
+                    Toast.makeText(asistenciaStaff.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
             }
         };
         guardarBtn.setOnClickListener(guardar);
@@ -169,12 +171,16 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(asistenciaStaff.this, AgregarAlumno.class);
-                intent.putExtra("proyecto", datos.getString("proyecto"));
-                intent.putExtra("espacio", datos.getString("espacio"));
-                intent.putExtra("incubadora", datos.getString("incubadora"));
-                intent.putExtra("username", nombreUsuario.getText());
-                startActivityForResult(intent, 1);
+                if (isOnline()) {
+                    Intent intent = new Intent(asistenciaStaff.this, AgregarAlumno.class);
+                    intent.putExtra("proyecto", datos.getString("proyecto"));
+                    intent.putExtra("espacio", datos.getString("espacio"));
+                    intent.putExtra("incubadora", datos.getString("incubadora"));
+                    intent.putExtra("username", nombreUsuario.getText());
+                    startActivityForResult(intent, 1);
+                }
+                else
+                    Toast.makeText(asistenciaStaff.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
             }
         };
         agregarBtn.setOnClickListener(agregar);
@@ -356,5 +362,13 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
             }
             return result;
         }
+    }
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 }
