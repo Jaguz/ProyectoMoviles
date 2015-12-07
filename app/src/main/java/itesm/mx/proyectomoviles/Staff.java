@@ -50,7 +50,7 @@ public class Staff extends AppCompatActivity {
             public void onResult(JSONObject object) {
                 processJson(object);
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
+        }, this).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
         Toast.makeText(this, "Finalizado", Toast.LENGTH_SHORT).show();
         final AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
 

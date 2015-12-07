@@ -126,7 +126,7 @@ public class AgregarAlumnoTec extends AppCompatActivity {
                             }
                             System.out.println(urlParameters);
                         }
-                    }).execute("https://spreadsheets.google.com/tq?key=12aBrk-jw5Dhfdh6otjHyufpl48HsKm6KQj255Nz5hEA");
+                    }, context).execute("https://spreadsheets.google.com/tq?key=12aBrk-jw5Dhfdh6otjHyufpl48HsKm6KQj255Nz5hEA");
 
 
                 }

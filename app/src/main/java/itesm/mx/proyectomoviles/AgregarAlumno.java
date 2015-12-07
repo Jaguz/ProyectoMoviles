@@ -127,7 +127,7 @@ ArrayList<String> list = new ArrayList<String>();
                             }
                             System.out.println(urlParameters);
                         }
-                    }).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
+                    }, context).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
 
 
                 }

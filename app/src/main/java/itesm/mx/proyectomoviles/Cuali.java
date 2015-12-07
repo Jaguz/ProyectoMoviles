@@ -97,7 +97,7 @@ public class Cuali extends AppCompatActivity  {
     }
 
     public void init(){
-        new DownloadWebpageTask(new AsyncResult() {
+         new DownloadWebpageTask(new AsyncResult() {
             @Override
             public void onResult(JSONObject object) {
                 try {
@@ -176,7 +176,7 @@ public class Cuali extends AppCompatActivity  {
                                             e.printStackTrace();
                                         }
                                     }
-                                }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
+                                }, Cuali.this).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
 
 
 
@@ -184,7 +184,7 @@ public class Cuali extends AppCompatActivity  {
                                 e.printStackTrace();
                             }
                         }
-                    }).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
+                    }, Cuali.this).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
 
 
 
@@ -192,7 +192,7 @@ public class Cuali extends AppCompatActivity  {
                     e.printStackTrace();
                 }
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1fg-dApPcbjP6dfzCZJVPAL4xUGIlVDdslZol6ilb0Kc");
+        }, Cuali.this).execute("https://spreadsheets.google.com/tq?key=1fg-dApPcbjP6dfzCZJVPAL4xUGIlVDdslZol6ilb0Kc");
 
     }
 
@@ -220,7 +220,7 @@ public class Cuali extends AppCompatActivity  {
                     e.printStackTrace();
                 }
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
+        }, Cuali.this).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
     }
 
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {

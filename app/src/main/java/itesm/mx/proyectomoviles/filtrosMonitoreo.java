@@ -108,7 +108,7 @@ public class filtrosMonitoreo extends AppCompatActivity {
                 cuantiBT.setOnClickListener(verCuanti);
                 cualiBT.setOnClickListener(verCuali);
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
+        }, this).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
 
 
 

@@ -62,7 +62,7 @@ public class asistenciaAlumnosTec extends Activity implements AdapterView.OnItem
             public void onResult(JSONObject object) {
                 processJson(object);
             }
-        }).execute("https://spreadsheets.google.com/tq?key=12aBrk-jw5Dhfdh6otjHyufpl48HsKm6KQj255Nz5hEA");
+        }, this).execute("https://spreadsheets.google.com/tq?key=12aBrk-jw5Dhfdh6otjHyufpl48HsKm6KQj255Nz5hEA");
 
         final Bundle datos = getIntent().getExtras();
 
@@ -95,7 +95,7 @@ public class asistenciaAlumnosTec extends Activity implements AdapterView.OnItem
 
 
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
+        }, this).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
 
         Toast.makeText(this, "Finalizado", Toast.LENGTH_SHORT).show();
 
@@ -259,7 +259,7 @@ public class asistenciaAlumnosTec extends Activity implements AdapterView.OnItem
             public void onResult(JSONObject object) {
                 processJson(object);
             }
-        }).execute("https://spreadsheets.google.com/tq?key=12aBrk-jw5Dhfdh6otjHyufpl48HsKm6KQj255Nz5hEA");
+        }, this).execute("https://spreadsheets.google.com/tq?key=12aBrk-jw5Dhfdh6otjHyufpl48HsKm6KQj255Nz5hEA");
     }
 
 

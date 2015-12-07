@@ -221,18 +221,18 @@ public class TableMainLayout extends RelativeLayout {
                                             e.printStackTrace();
                                         }
                                     }
-                                }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
+                                }, context).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
-                    }).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
+                    }, context).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1ECcVX2RlkyILoUxpX5eVbtt8gfo7GgdyGAJKxhT8JVk");
+        }, context).execute("https://spreadsheets.google.com/tq?key=1ECcVX2RlkyILoUxpX5eVbtt8gfo7GgdyGAJKxhT8JVk");
 
 
     }
