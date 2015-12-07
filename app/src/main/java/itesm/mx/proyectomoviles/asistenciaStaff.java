@@ -64,7 +64,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
             public void onResult(JSONObject object) {
                 processJson(object);
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
+        }, this).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
 
         final Bundle datos = getIntent().getExtras();
 
@@ -97,7 +97,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
 
 
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
+        }, this).execute("https://spreadsheets.google.com/tq?key=1-8-lwlgfjzrld4FdhEYCqoi1fQrtpnPneuI_cP8oxd8");
 
         Toast.makeText(this, "Finalizado", Toast.LENGTH_SHORT).show();
 
@@ -262,7 +262,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
             public void onResult(JSONObject object) {
                 processJson(object);
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
+        }, this).execute("https://spreadsheets.google.com/tq?key=1GbTumbQeUZXbQ2nNiA2VxetiU5tsw1RSHHY2QL9KZ4E");
     }
 
 

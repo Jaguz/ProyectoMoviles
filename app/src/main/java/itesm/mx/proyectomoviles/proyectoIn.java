@@ -66,7 +66,7 @@ public class proyectoIn extends AppCompatActivity {
             public void onResult(JSONObject object) {
 
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
+        }, this).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
 
     }
 

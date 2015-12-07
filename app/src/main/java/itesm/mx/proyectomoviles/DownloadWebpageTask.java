@@ -4,7 +4,10 @@ package itesm.mx.proyectomoviles;
  * Created by USUARIO on 16/11/2015.
  */
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,9 +21,12 @@ import java.net.URL;
 
 public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
     AsyncResult callback;
+    public boolean flag = false;
+    Context context;
 
-    public DownloadWebpageTask(AsyncResult callback) {
+    public DownloadWebpageTask(AsyncResult callback, Context cont) {
         this.callback = callback;
+        this.context = cont;
     }
 
     @Override
@@ -29,7 +35,9 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
         // params comes from the execute() call: params[0] is the url.
         try {
             return downloadUrl(urls[0]);
+
         } catch (IOException e) {
+            flag = true;
             return "Unable to download the requested page.";
         }
     }
@@ -38,6 +46,12 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         // remove the unnecessary parts from the response and construct a JSON
+        if(flag){
+            System.out.println("Connection Failure");
+            Toast.makeText(context, "Hubo un fallo de conexión.", Toast.LENGTH_SHORT).show();
+            ((Activity)context).finish();
+            return;
+        }
         int start = result.indexOf("{", result.indexOf("{") + 1);
         int end = result.lastIndexOf("}");
         String jsonResponse = result.substring(start, end);

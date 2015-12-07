@@ -113,7 +113,7 @@ public class Administrador extends AppCompatActivity {
                 cargarBT.setOnClickListener(verAsistencia);
                 alumnosBT.setOnClickListener(AsistenciaAlumnos);
             }
-        }).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
+        }, this).execute("https://spreadsheets.google.com/tq?key=1pWC4p-9M_yWUpg0iYTDgUADvHBfoPqG4rBlv6j3jXD8");
 
 
 
