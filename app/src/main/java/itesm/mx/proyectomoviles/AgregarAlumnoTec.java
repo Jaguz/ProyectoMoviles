@@ -1,6 +1,8 @@
 package itesm.mx.proyectomoviles;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -14,17 +16,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class AgregarAlumnoTec extends AppCompatActivity {
     Context context;
+    ArrayList<String> list = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,31 +56,82 @@ public class AgregarAlumnoTec extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isOnline()) {
-                    String str1 = newName.getText().toString();
-                    String str2 = datos.getString("proyecto");
-                    String str3 = datos.getString("incubadora");
-                    String str4 = datos.getString("espacio");
-                    String urlParameters = "";
-                    try {
-                        urlParameters = "entry_892296692=" + URLEncoder.encode(str1, "UTF-8") + "&" +
-                                "entry_1466167574=" + URLEncoder.encode(str2, "UTF-8") + "&" +
-                                "entry_969178162=" + URLEncoder.encode(str3, "UTF-8") + "&" +
-                                "entry_1094678820=" + URLEncoder.encode(str4, "UTF-8");
-                        new PostTask(new AsyncResult() {
-                            @Override
-                            public void onResult(JSONObject object) {
-
-                            }
-                        }).execute(urlParameters);
-                    } catch (UnsupportedEncodingException ex) {
-                        Toast.makeText(AgregarAlumnoTec.this, "D=", Toast.LENGTH_LONG).show();
+                    final String str1 = newName.getText().toString();
+                    if(str1.equals("")){
+                        Toast.makeText(AgregarAlumnoTec.this, "Favor de escribir un nombre.", Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                    System.out.println(urlParameters);
+                    new DownloadWebpageTask(new AsyncResult() {
+                        @Override
+                        public void onResult(JSONObject object) {
+                            processJson(object);
+                            boolean b=false;
+                            for(int i=0; i<list.size(); i++){
+                                System.out.println(list.get(i));
+                                if(list.get(i).equals(str1)){
+                                    b = true;
+                                    new AlertDialog.Builder(AgregarAlumnoTec.this)
+                                            .setMessage("Ya existe un alumno con ese nombre. ¿Deseas agregarlo de todas formas?")
+                                            .setCancelable(false)
+                                            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    String str2 = datos.getString("proyecto");
+                                                    String str3 = datos.getString("incubadora");
+                                                    String str4 = datos.getString("espacio");
+                                                    String urlParameters = "";
+                                                    try {
+                                                        urlParameters = "entry_892296692=" + URLEncoder.encode(str1, "UTF-8") + "&" +
+                                                                "entry_1466167574=" + URLEncoder.encode(str2, "UTF-8") + "&" +
+                                                                "entry_969178162=" + URLEncoder.encode(str3, "UTF-8") + "&" +
+                                                                "entry_1094678820=" + URLEncoder.encode(str4, "UTF-8");
+                                                        new PostTask(new AsyncResult() {
+                                                            @Override
+                                                            public void onResult(JSONObject object) {
+
+                                                            }
+                                                        }).execute(urlParameters);
+                                                    } catch (UnsupportedEncodingException ex) {
+                                                        Toast.makeText(AgregarAlumnoTec.this, "D=", Toast.LENGTH_LONG).show();
+                                                    }
+                                                    System.out.println(urlParameters);
+                                                }
+                                            })
+                                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    return;
+                                                }
+                                            })
+                                            .show();
+                                    break;
+                                }
+                            }
+                            if(b) return;
+                            String str2 = datos.getString("proyecto");
+                            String str3 = datos.getString("incubadora");
+                            String str4 = datos.getString("espacio");
+                            String urlParameters = "";
+                            try {
+                                urlParameters = "entry_892296692=" + URLEncoder.encode(str1, "UTF-8") + "&" +
+                                        "entry_1466167574=" + URLEncoder.encode(str2, "UTF-8") + "&" +
+                                        "entry_969178162=" + URLEncoder.encode(str3, "UTF-8") + "&" +
+                                        "entry_1094678820=" + URLEncoder.encode(str4, "UTF-8");
+                                new PostTask(new AsyncResult() {
+                                    @Override
+                                    public void onResult(JSONObject object) {
+
+                                    }
+                                }).execute(urlParameters);
+                            } catch (UnsupportedEncodingException ex) {
+                                Toast.makeText(AgregarAlumnoTec.this, "D=", Toast.LENGTH_SHORT).show();
+                            }
+                            System.out.println(urlParameters);
+                        }
+                    }).execute("https://spreadsheets.google.com/tq?key=12aBrk-jw5Dhfdh6otjHyufpl48HsKm6KQj255Nz5hEA");
+
 
                 }
                 else
                     Toast.makeText(AgregarAlumnoTec.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
-
             }
         };
         agregarBT.setOnClickListener(agregar);
@@ -137,7 +194,7 @@ public class AgregarAlumnoTec extends AppCompatActivity {
                 wr.flush();
                 wr.close();
                 System.out.println("Response Code : " + connection.getResponseCode());
-                finish();
+
             }catch (Exception e){
                 result = false;
                 e.printStackTrace();
@@ -152,6 +209,7 @@ public class AgregarAlumnoTec extends AppCompatActivity {
         protected void onPostExecute(Boolean result){
             //Print Success or failure message accordingly
             Toast.makeText(context, result ? "Se agregó el alumno correctamente.":"Hubo un error agregando al alumno.", Toast.LENGTH_LONG).show();
+            finish();
         }
     }
     public boolean isOnline() {
@@ -161,5 +219,27 @@ public class AgregarAlumnoTec extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    private void processJson(JSONObject object) {
+        try {
+            final Bundle datos = getIntent().getExtras();
+            JSONArray rows = object.getJSONArray("rows");
+            list.clear();
+            for (int r = 0; r < rows.length(); ++r) {
+                JSONObject row = rows.getJSONObject(r);
+                JSONArray columns = row.getJSONArray("c");
+                String nombre = columns.getJSONObject(1).getString("v");
+                String proy = columns.getJSONObject(2).getString("v");
+                String esp = columns.getJSONObject(4).getString("v");
+                String inc = columns.getJSONObject(3).getString("v");
+                if(proy.equals(datos.getString("proyecto"))&&esp.equals(datos.getString("espacio"))&&inc.equals(datos.getString("incubadora"))) {
+                    list.add(nombre);
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
