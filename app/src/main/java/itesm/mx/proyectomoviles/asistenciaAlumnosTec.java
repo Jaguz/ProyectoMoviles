@@ -170,7 +170,7 @@ public class asistenciaAlumnosTec extends Activity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 if (isOnline()) {
-                    Intent intent = new Intent(asistenciaAlumnosTec.this, AgregarAlumno.class);
+                    Intent intent = new Intent(asistenciaAlumnosTec.this, AgregarAlumnoTec.class);
                     intent.putExtra("proyecto", datos.getString("proyecto"));
                     intent.putExtra("espacio", datos.getString("espacio"));
                     intent.putExtra("incubadora", datos.getString("incubadora"));
