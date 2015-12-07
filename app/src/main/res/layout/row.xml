@@ -48,7 +48,8 @@
         android:text="Large Text"
         android:id="@+id/incubadoraTV"
         android:layout_above="@+id/lugar"
-        android:layout_toEndOf="@+id/textView3" />
+        android:layout_toEndOf="@+id/textView3"
+        android:textColor="#eeeeee" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,7 +58,8 @@
         android:text="Large Text"
         android:id="@+id/espacioTV"
         android:layout_above="@+id/nameTV"
-        android:layout_toEndOf="@+id/lugar" />
+        android:layout_toEndOf="@+id/lugar"
+        android:textColor="#eeeeee" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,6 +69,7 @@
         android:id="@+id/nameTV"
         android:layout_below="@+id/lugar"
         android:layout_toEndOf="@+id/lugar"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:textColor="#eeeeee" />
 
 </RelativeLayout>

@@ -67,7 +67,7 @@ public class Staff extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else
-                    Toast.makeText(Staff.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Staff.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
 
         };

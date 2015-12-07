@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     List<String> espacio = new ArrayList<String>();
     List<String> usuarioStaff = new ArrayList<String>();
     List<String> contrasenaStaff = new ArrayList<String>();
+    boolean loaded=false;
     Context context;
 
     @Override
@@ -46,50 +47,45 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                if (isOnline()) {
-                Intent intent = new Intent(MainActivity.this, proyectoIn.class);
-                Intent intent2 = new Intent(MainActivity.this, Staff.class);
+                if(!loaded) loaded  = loadUsers();
+                if(loaded) {
+                    if (isOnline()) {
+                        Intent intent = new Intent(MainActivity.this, proyectoIn.class);
+                        Intent intent2 = new Intent(MainActivity.this, Staff.class);
+                        boolean found = false;
+                        for (int i = 0; i < usuario.size(); i++) {
+                            if (userET.getText().toString().equals(usuario.get(i)) && passET.getText().toString().equals(contrasena.get(i))) {
 
-                for (int i = 0; i < usuario.size(); i++) {
-                    if (userET.getText().toString().equals(usuario.get(i)) && passET.getText().toString().equals(contrasena.get(i))) {
+                                intent.putExtra("username", userET.getText().toString());
+                                intent.putExtra("password", passET.getText().toString());
+                                startActivityForResult(intent, 1);
+                                found = true;
+                                break;
+                            }
 
-                        intent.putExtra("username", userET.getText().toString());
-                        intent.putExtra("password", passET.getText().toString());
-                        startActivityForResult(intent, 1);
-                    }
-
+                        }
+                        if (!found)
+                            for (int i = 0; i < usuarioStaff.size(); i++) {
+                                if (userET.getText().toString().equals(usuarioStaff.get(i)) &&
+                                        passET.getText().toString().equals(contrasenaStaff.get(i))) {
+                                    intent2.putExtra("username", userET.getText().toString());
+                                    intent2.putExtra("password", passET.getText().toString());
+                                    intent2.putExtra("espUser", espacio.get(i));
+                                    startActivityForResult(intent2, 1);
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        if (!found)
+                            Toast.makeText(MainActivity.this, "Ususario o contraseña incorrectos.", Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(MainActivity.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
                 }
-                for (int i = 0; i < usuarioStaff.size(); i++) {
-                    if (userET.getText().toString().equals(usuarioStaff.get(i)) &&
-                            passET.getText().toString().equals(contrasenaStaff.get(i))) {
-                        intent2.putExtra("username", userET.getText().toString());
-                        intent2.putExtra("password", passET.getText().toString());
-                        intent2.putExtra("espUser", espacio.get(i));
-                        startActivityForResult(intent2, 1);
-                    }
-                }
-            }
-                else
-                    Toast.makeText(MainActivity.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
 
             }
 
         };
-
-        new DownloadWebpageTask(new AsyncResult() {
-            @Override
-            public void onResult(JSONObject object) {
-                processJsonStaff(object);
-            }
-        }).execute("https://spreadsheets.google.com/tq?key=1atmo4rfSPICcsjDxZBbq0QohQqzZDYuKpx7j4ExNoQw");
-
-        new DownloadWebpageTask(new AsyncResult() {
-            @Override
-            public void onResult(JSONObject object) {
-                processJson(object);
-            }
-        }).execute("https://spreadsheets.google.com/tq?key=1EaWzs2mN10HUr-nwV9C1tanRAzTkCJ27pntkxqeIPyw");
-
+        loadUsers();
         entrarButton.setOnClickListener(registro);
     }
 
@@ -133,6 +129,29 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean loadUsers(){
+        if(isOnline()) {
+            new DownloadWebpageTask(new AsyncResult() {
+                @Override
+                public void onResult(JSONObject object) {
+                    processJsonStaff(object);
+                }
+            }).execute("https://spreadsheets.google.com/tq?key=1atmo4rfSPICcsjDxZBbq0QohQqzZDYuKpx7j4ExNoQw");
+
+            new DownloadWebpageTask(new AsyncResult() {
+                @Override
+                public void onResult(JSONObject object) {
+                    processJson(object);
+                }
+            }).execute("https://spreadsheets.google.com/tq?key=1EaWzs2mN10HUr-nwV9C1tanRAzTkCJ27pntkxqeIPyw");
+            return true;
+        }
+        else {
+            Toast.makeText(MainActivity.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 

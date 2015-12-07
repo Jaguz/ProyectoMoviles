@@ -45,9 +45,9 @@ public class ListViewAdapter extends ArrayAdapter<Proyecto> {
         incubadora.setText(proyecto.getIncubadora());
         espacio.setText(proyecto.getEspacio());
         proyect.setText(proyecto.getProyecto());
-        incubadora.setTextColor(Color.BLACK);
-        espacio.setTextColor(Color.BLACK);
-        proyect.setTextColor(Color.BLACK);
+        incubadora.setTextColor(Color.WHITE);
+        espacio.setTextColor(Color.WHITE);
+        proyect.setTextColor(Color.WHITE);
 
         return row;
     }

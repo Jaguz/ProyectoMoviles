@@ -87,7 +87,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                         String fecha = columns.getJSONObject(1).getString("v");
                         fechas.add(fecha);
                     }
-                    spin_adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, fechas);
+                    spin_adapter = new ArrayAdapter<String>(context,  R.layout.my_spinner, fechas);
                     spin_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner.setAdapter(spin_adapter);
 
@@ -133,13 +133,14 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                 Toast.makeText(asistenciaStaff.this, "Se han registrado " + Integer.toString(adapter.counter) + " asistencias.", Toast.LENGTH_SHORT).show();
 
                 for (int i = 0; i < list.size(); i++) {
-                    CheckBox checkbox = (CheckBox) alumnosLV.getChildAt(i).findViewById(R.id.checkBox1);
+                    System.out.println(i + " " + list.size() + " " + alumnosLV.getCount());
+                    boolean b =  adapter.getItem(i).isSelected() ;
                     str1 = list.get(i).getName();
                     str2 = datos.getString("proyecto");
                     str3 = datos.getString("incubadora");
                     str4 = datos.getString("espacio");
                     str5 = spinner.getSelectedItem().toString();
-                    str6 = checkbox.isChecked() ? "1" : "0";
+                    str6 = b? "1" : "0";
                     urlParameters = "";
                     try {
                         urlParameters = "entry_1736803261=" + URLEncoder.encode(str1, "UTF-8") + "&" +
@@ -162,7 +163,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                 finish();
             }
                 else
-                    Toast.makeText(asistenciaStaff.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(asistenciaStaff.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
         guardarBtn.setOnClickListener(guardar);
@@ -180,7 +181,7 @@ public class asistenciaStaff extends Activity implements OnItemClickListener{
                     startActivityForResult(intent, 1);
                 }
                 else
-                    Toast.makeText(asistenciaStaff.this, "No hay conexión a internet.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(asistenciaStaff.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
         agregarBtn.setOnClickListener(agregar);

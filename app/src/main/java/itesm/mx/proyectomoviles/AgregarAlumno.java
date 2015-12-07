@@ -2,6 +2,8 @@ package itesm.mx.proyectomoviles;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,28 +50,30 @@ Context context;
 
             @Override
             public void onClick(View v) {
-                String str1 = newName.getText().toString();
-                String str2 = datos.getString("proyecto");
-                String str3 = datos.getString("incubadora");
-                String str4 = datos.getString("espacio");
-                String urlParameters="";
-                try {
-                    urlParameters = "entry_1030089059=" + URLEncoder.encode(str1, "UTF-8") + "&" +
-                            "entry_173953152=" + URLEncoder.encode(str2, "UTF-8") + "&" +
-                            "entry_125978482=" + URLEncoder.encode(str3, "UTF-8") + "&" +
-                            "entry_1481530749=" + URLEncoder.encode(str4, "UTF-8");
-                    new PostTask(new AsyncResult() {
-                        @Override
-                        public void onResult(JSONObject object) {
+                if(isOnline()) {
+                    String str1 = newName.getText().toString();
+                    String str2 = datos.getString("proyecto");
+                    String str3 = datos.getString("incubadora");
+                    String str4 = datos.getString("espacio");
+                    String urlParameters = "";
+                    try {
+                        urlParameters = "entry_1030089059=" + URLEncoder.encode(str1, "UTF-8") + "&" +
+                                "entry_173953152=" + URLEncoder.encode(str2, "UTF-8") + "&" +
+                                "entry_125978482=" + URLEncoder.encode(str3, "UTF-8") + "&" +
+                                "entry_1481530749=" + URLEncoder.encode(str4, "UTF-8");
+                        new PostTask(new AsyncResult() {
+                            @Override
+                            public void onResult(JSONObject object) {
 
-                        }
-                    }).execute(urlParameters);
+                            }
+                        }).execute(urlParameters);
+                    } catch (UnsupportedEncodingException ex) {
+                        Toast.makeText(AgregarAlumno.this, "D=", Toast.LENGTH_LONG).show();
+                    }
+                    System.out.println(urlParameters);
                 }
-                catch (UnsupportedEncodingException ex) {
-                    Toast.makeText(AgregarAlumno.this, "D=", Toast.LENGTH_LONG).show();
-                }
-                System.out.println(urlParameters);
-
+                else
+                    Toast.makeText(AgregarAlumno.this, "No hay conexión a internet.", Toast.LENGTH_SHORT).show();
             }
         };
         agregarBT.setOnClickListener(agregar);
@@ -148,5 +152,13 @@ Context context;
             //Print Success or failure message accordingly
             Toast.makeText(context, result ? "Se agregó el alumno correctamente.":"Hubo un error agregando al alumno.", Toast.LENGTH_LONG).show();
         }
+    }
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 }
